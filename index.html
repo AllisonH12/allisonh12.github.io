@@ -8,7 +8,20 @@
   <body>
     <h1>Welcome to my homepage!</h1>
     <p>Here's a random dog picture:</p>
-    <img src="https://dog.ceo/api/breeds/image/random" alt="Random dog picture">
+    <img id="dog-image" alt="Random dog picture">
+    <script>
+      // Fetch a random dog picture from the API
+      fetch('https://dog.ceo/api/breeds/image/random')
+        .then(response => response.json())
+        .then(data => {
+          // Extract the image URL from the response
+          const imageUrl = data.message;
+          // Set the image source to the extracted URL
+          const image = document.getElementById('dog-image');
+          image.src = imageUrl;
+        })
+        .catch(error => console.error(error));
+    </script>
   </body>
 </html>
 
