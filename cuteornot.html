@@ -78,7 +78,8 @@
     function vote(voteValue) {
       const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
+       // if (this.readyState === 4 && this.status === 200) {
+        if (1) {
           alert('Vote received: ' + voteValue);
           location.reload();
         }
