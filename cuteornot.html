@@ -75,8 +75,10 @@
     <button class="vote-button" onclick="vote('dog')">Vote Dog</button>
   </div>
   <script>
+
     function vote(voteValue) {
       const xhr = new XMLHttpRequest();
+
       xhr.onreadystatechange = function() {
        // if (this.readyState === 4 && this.status === 200) {
         if (1) {
