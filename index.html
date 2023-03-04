@@ -10,20 +10,8 @@
     <p><a href="https://github.com/AllisonH12">My github repos</a> </p>
 
     <p>Here's a random capybara picture:</p>
-    <img id="capy-image" alt="Random capybara picture" style="max-width: 500px;">
-    <script>
-      // Fetch a random capybara picture from the API
-      fetch('https://capybaras.herokuapp.com/api/capybaras/random')
-        .then(response => response.json())
-        .then(data => {
-          // Extract the image URL from the response
-          const imageUrl = data.message;
-          // Set the image source to the extracted URL
-          const image = document.getElementById('capy-image');
-          image.src = imageUrl;
-        })
-        .catch(error => console.error(error));
-    </script>
+    <img id="capy-image" alt="Random capybara picture" style="max-width: 500px;" src="https://api.capy.lol/v1/capybara">
+
 
 
     <p>Here's a random dog picture:</p>
