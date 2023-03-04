@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cute or Not: Capybara vs Dog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .image-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .image-container {
+      position: relative;
+    }
+    .image-description {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 10px;
+    }
+    .vote-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .vote-button {
+      font-size: 24px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .vote-button:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cute or Not: Capybara vs Dog</h1>
+  <div class="image-row">
+    <div class="image-container">
+      <div class="image-description">Capybara</div>
+      <img id="capy-image" alt="Capybara picture" title="Capybara" style="max-width: 500px; height: 300px; object-fit: cover;" src="https://api.capy.lol/v1/capybara">
+    </div>
+    <div class="image-container">
+      <div class="image-description">Dog</div>
+      <img id="dog-image" alt="Random dog picture" title="dog"
+      style="max-width: 500px; height: 300px; object-fit: cover;">
+    <script>
+      // Fetch a random dog picture from the API
+      fetch('https://dog.ceo/api/breeds/image/random')
+        .then(response => response.json())
+        .then(data => {
+          // Extract the image URL from the response
+          const imageUrl = data.message;
+          // Set the image source to the extracted URL
+          const image = document.getElementById('dog-image');
+          image.src = imageUrl;
+        })
+        .catch(error => console.error(error));
+    </script>
+    </div>
+  </div>
+  <div class="vote-form">
+    <button class="vote-button" onclick="vote('capy')">Vote Capybara</button>      
+    <span style="margin: 0 200px;">or</span>
+    <button class="vote-button" onclick="vote('dog')">Vote Dog</button>
+  </div>
+  <script>
+    function vote(voteValue) {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+          alert('Vote received: ' + voteValue);
+          location.reload();
+        }
+      };
+      xhr.open('POST', '/vote', true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send('vote=' + encodeURIComponent(voteValue));
+    }
+  </script>
+</body>
+</html>
