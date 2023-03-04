@@ -12,8 +12,8 @@
     <p>Here's a random capybara picture:</p>
     <img id="capy-image" alt="Random capybara picture" style="max-width: 500px;">
     <script>
-      // Fetch a random dog picture from the API
-      fetch('https://api.capy.lol/v1/capybara')
+      // Fetch a random capybara picture from the API
+      fetch('https://capybaras.herokuapp.com/api/capybaras/random')
         .then(response => response.json())
         .then(data => {
           // Extract the image URL from the response
