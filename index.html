@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Allison Huang github Homepage</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-    <h1>Allison Huang on github!</h1>
-    <p><a href="https://github.com/AllisonH12">My github repos</a> </p>
-    <p>Here's a random dog picture:</p>
-    <img id="dog-image" alt="Random dog picture" style="max-width: 500px;">
+
+<head>
+  <title>Allison Huang github Homepage</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <h1>Allison Huang on github!</h1>
+  <p><a href="https://github.com/AllisonH12">My github repos</a> </p>
+
+
+  <div class="image-row">
+
+    <img id="capy-image" alt="Random capybara picture" title="capybara"
+      style="max-width: 500px; height: 300px; object-fit: cover;" src="https://api.capy.lol/v1/capybara">
+
+    <img id="dog-image" alt="Random dog picture" title="dog"
+      style="max-width: 500px; height: 300px; object-fit: cover;">
     <script>
       // Fetch a random dog picture from the API
       fetch('https://dog.ceo/api/breeds/image/random')
@@ -23,14 +32,5 @@
         })
         .catch(error => console.error(error));
     </script>
-
-<p>
-
-    Want to talk to a capybara? <a href="https://chat.huangallison.com/>Capy Chat</a>
-<BR>
-    Want to talk to a dog or cat? <a href="https://chat.huangallison.com/>Dog Chat</a>
-</p>
   </body>
 </html>
-
-
