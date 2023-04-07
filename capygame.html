@@ -66,7 +66,7 @@
 <body>
     <h1>Catch a Capybara</h1>
     <div class="timer">
-        Time Remaining: <span id="timer">30</span> seconds
+        Time Remaining: <span id="timer">30</span> seconds.    
     </div>
     
     <div id="gameContainer">
@@ -75,9 +75,11 @@
     <div class="score">
         Caught: <span id="whacked">0</span>
         Missed: <span id="missed">0</span>
+        <br>
+        <button id="resetButton">Reset Game</button>
     </div>
     <script>
-
+ 
         //const canvas = document.getElementById('gameCanvas');
         const gameContainer = document.getElementById('gameContainer');
         const canvas = document.createElement('canvas');
@@ -217,6 +219,23 @@
                 }, gameDuration);
             }
         }
+        // Create a function to reset the game
+        function resetGame() {
+            if (gameStarted) {
+                clearTimeout(gameDuration);
+                gameStarted = false;
+            }
+            capybarasWhacked = 0;
+            capybarasMissed = 0;
+            timeRemaining = gameDuration / 1000; // Reset the timer
+            updateScore();
+            updateTimer();
+            startGame();
+        }
+
+        // Add an event listener for the reset button
+        document.getElementById('resetButton').addEventListener('click', resetGame);
+
 
         startGame();
     </script>
