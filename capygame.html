@@ -21,14 +21,19 @@
             /* Add the following styles */
         #gameContainer {
             position: relative;
-            max-width: 800px;
+            width: 100%;
+            padding-bottom: 75%; /* aspect ratio 4:3 (600 / 800) */
             margin: 0 auto;
+            overflow: hidden;
         }
         #gameCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             cursor: pointer;
         }
-
-
     </style>
 </head>
 <body>
@@ -48,14 +53,14 @@
         const canvas = document.createElement('canvas');
         // Add this line after creating the canvas element
         canvas.id = 'gameCanvas';
+        // Calculate the actual width and height based on the gameContainer size
+        const actualWidth = gameContainer.clientWidth;
+        const actualHeight = gameContainer.clientHeight;
 
-        canvas.width = 800;
-        canvas.height = 600;
+        canvas.width = actualWidth;
+        canvas.height = actualHeight;
         gameContainer.appendChild(canvas);
 
-        const scaleFactor = Math.min(gameContainer.clientWidth / canvas.width, gameContainer.clientHeight / canvas.height);
-        canvas.style.transform = `scale(${scaleFactor})`;
-        canvas.style.transformOrigin = 'top left';
         const ctx = canvas.getContext('2d');
         ctx.imageSmoothingEnabled = false;
         const capybaraSize = 80;
