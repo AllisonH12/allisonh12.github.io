@@ -15,6 +15,7 @@
             height: auto;
             border: 1px solid black;
         }
+
         #stats {
             display: flex;
             justify-content: space-around;
@@ -56,7 +57,9 @@
     </style>
 </head>
 <body>
-    <h1>Whack a Capybara</h1>
+    <h1>Whack a Capybara</h1>    
+    <div id="gameContainer">
+    </div>
     <div id="stats">
         <div class="score">
             Capybaras Whacked: <span id="whacked">0</span>
@@ -66,12 +69,7 @@
         <div class="timer">
             Time Remaining: <span id="timer">30</span> seconds
         </div>
-    </div>
-    
-    
-    <div id="gameContainer">
-    </div>
-    
+    </div>    
 
     <script>
         let timeRemaining = gameDuration / 1000; // Convert to seconds
