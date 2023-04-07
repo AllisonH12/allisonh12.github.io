@@ -65,7 +65,7 @@
 
         const ctx = canvas.getContext('2d');
         ctx.imageSmoothingEnabled = false;
-        const capybaraSize = 80;
+        const capybaraSize = actualWidth * 0.1;
         const gameDuration = 30000; // 30 seconds
 
         let capybaraX = Math.random() * (canvas.width - capybaraSize);
