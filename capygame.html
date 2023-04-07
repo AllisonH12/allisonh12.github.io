@@ -35,6 +35,15 @@
         let capybarasWhacked = 0;
         let capybarasMissed = 0;
         let gameStarted = false;
+
+        const backgroundImage = new Image();
+        backgroundImage.src = 'back.png'; // Replace 'background.png' with your image file name
+
+        function drawBackground() {
+        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+        }
+
+
         const capybaraImage = new Image();
         capybaraImage.src = 'capy.jpg'; // Replace 'capybara.png' with your image file name
 
@@ -74,7 +83,8 @@
         });
 
         function gameLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            //ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
             drawCapybara();
             if (gameStarted) {
                 requestAnimationFrame(gameLoop);
