@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack a Capybara</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+        .score {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Whack a Capybara</h1>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div class="score">
+        Capybaras Whacked: <span id="whacked">0</span>
+        Capybaras Missed: <span id="missed">0</span>
+    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const capybaraSize = 50;
+        const gameDuration = 30000; // 30 seconds
+
+        let capybaraX = Math.random() * (canvas.width - capybaraSize);
+        let capybaraY = Math.random() * (canvas.height - capybaraSize);
+        let capybarasWhacked = 0;
+        let capybarasMissed = 0;
+        let gameStarted = false;
+
+        function drawCapybara() {
+            ctx.fillStyle = 'brown';
+            ctx.fillRect(capybaraX, capybaraY, capybaraSize, capybaraSize);
+        }
+
+        function updateScore() {
+            document.getElementById('whacked').textContent = capybarasWhacked;
+            document.getElementById('missed').textContent = capybarasMissed;
+        }
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            if (
+                mouseX >= capybaraX && mouseX <= capybaraX + capybaraSize &&
+                mouseY >= capybaraY && mouseY <= capybaraY + capybaraSize
+            ) {
+                capybarasWhacked++;
+            } else {
+                capybarasMissed++;
+            }
+
+            capybaraX = Math.random() * (canvas.width - capybaraSize);
+            capybaraY = Math.random() * (canvas.height - capybaraSize);
+
+            updateScore();
+        });
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawCapybara();
+            if (gameStarted) {
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        function startGame() {
+            if (!gameStarted) {
+                gameStarted = true;
+                gameLoop();
+                setTimeout(() => {
+                    gameStarted = false;
+                    alert('Game over!');
+                }, gameDuration);
+            }
+        }
+
+        startGame();
+    </script>
+</body>
+</html>
