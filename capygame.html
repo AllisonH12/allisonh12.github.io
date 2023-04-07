@@ -77,6 +77,38 @@
         Missed: <span id="missed">0</span>
     </div>
     <script>
+        const randomAnimals = ['rat.png', 'monkey.png', 'sonic.png','chick.png'];
+        // Load the random animal images
+        const randomAnimalImages = randomAnimals.map(src => {
+            const img = new Image();
+            img.src = src;
+            return img;
+        });
+
+        // Set the random animal size
+        const randomAnimalSize = 80;
+
+        // Set the initial random animal position
+        let randomAnimalX = Math.random() * (canvas.width - randomAnimalSize);
+        let randomAnimalY = Math.random() * (canvas.height - randomAnimalSize);
+
+        // Set the time interval to change the random animal position (in milliseconds)
+        const randomAnimalInterval = 2000;
+
+        // Function to draw a random animal on the canvas
+        function drawRandomAnimal() {
+            const randomIndex = Math.floor(Math.random() * randomAnimalImages.length);
+            ctx.drawImage(randomAnimalImages[randomIndex], randomAnimalX, randomAnimalY, randomAnimalSize, randomAnimalSize);
+        }
+
+        // Function to change the random animal position
+        function changeRandomAnimalPosition() {
+            randomAnimalX = Math.random() * (canvas.width - randomAnimalSize);
+            randomAnimalY = Math.random() * (canvas.height - randomAnimalSize);
+        }
+
+
+
         //const canvas = document.getElementById('gameCanvas');
         const gameContainer = document.getElementById('gameContainer');
         const canvas = document.createElement('canvas');
@@ -163,12 +195,15 @@
         function gameLoop() {
             //ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBackground();
+            drawRandomAnimal();
             drawCapybara();
             if (gameStarted) {
                 requestAnimationFrame(gameLoop);
             }
         }
 
+        setInterval(changeRandomAnimalPosition, randomAnimalInterval);
+        
         function startGame() {
             if (!gameStarted) {
                 gameStarted = true;
