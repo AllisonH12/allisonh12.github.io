@@ -15,19 +15,44 @@
         .score {
             font-size: 24px;
         }
+            /* Add the following styles */
+        #gameContainer {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        /* Update the existing styles */
+        canvas {
+            width: 100%;
+            height: auto;
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
     <h1>Whack a Capybara</h1>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </div>
+    
     <div class="score">
         Capybaras Whacked: <span id="whacked">0</span>
         Capybaras Missed: <span id="missed">0</span>
     </div>
     <script>
-        const canvas = document.getElementById('gameCanvas');
+        //const canvas = document.getElementById('gameCanvas');
+        const gameContainer = document.getElementById('gameContainer');
+        const canvas = document.createElement('canvas');
+        canvas.width = 800;
+        canvas.height = 600;
+        gameContainer.appendChild(canvas);
+
+        const scaleFactor = Math.min(gameContainer.clientWidth / canvas.width, gameContainer.clientHeight / canvas.height);
+        canvas.style.transform = `scale(${scaleFactor})`;
+        canvas.style.transformOrigin = 'top left';
         const ctx = canvas.getContext('2d');
-        const capybaraSize = 50;
+        ctx.imageSmoothingEnabled = false;
+        const capybaraSize = 80;
         const gameDuration = 30000; // 30 seconds
 
         let capybaraX = Math.random() * (canvas.width - capybaraSize);
