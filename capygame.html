@@ -35,11 +35,18 @@
         let capybarasWhacked = 0;
         let capybarasMissed = 0;
         let gameStarted = false;
+        const capybaraImage = new Image();
+        capybaraImage.src = 'capy.jpg'; // Replace 'capybara.png' with your image file name
 
         function drawCapybara() {
-            ctx.fillStyle = 'brown';
-            ctx.fillRect(capybaraX, capybaraY, capybaraSize, capybaraSize);
-        }
+        ctx.drawImage(capybaraImage, capybaraX, capybaraY, capybaraSize, capybaraSize);
+        }   
+
+
+        //function drawCapybara() {
+        //    ctx.fillStyle = 'brown';
+        //    ctx.fillRect(capybaraX, capybaraY, capybaraSize, capybaraSize);
+        //}
 
         function updateScore() {
             document.getElementById('whacked').textContent = capybarasWhacked;
