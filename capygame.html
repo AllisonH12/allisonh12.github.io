@@ -60,7 +60,7 @@
         const actualHeight = gameContainer.clientHeight;
 
         canvas.width = actualWidth;
-        canvas.height = actualHeight;
+        canvas.height = actualWidth * 0.75;
         gameContainer.appendChild(canvas);
 
         const ctx = canvas.getContext('2d');
