@@ -196,7 +196,7 @@
         function gameLoop() {
             //ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBackground();
-            drawRandomAnimal();
+            //drawRandomAnimal();
             drawCapybara();
             if (gameStarted) {
                 requestAnimationFrame(gameLoop);
@@ -216,8 +216,23 @@
                 }, gameDuration);
             }
         }
+        // Create a new function to draw and update the random animal
+        function randomAnimalLoop() {
+            // Clear the previous random animal
+            ctx.clearRect(randomAnimalX, randomAnimalY, randomAnimalSize, randomAnimalSize);
+            
+            // Draw the random animal
+            drawRandomAnimal();
+
+            // Change the random animal position
+            changeRandomAnimalPosition();
+
+            // Call the randomAnimalLoop again after a delay (e.g., 500ms)
+            setTimeout(randomAnimalLoop, 500);
+        }
 
         startGame();
+        randomAnimalLoop();
     </script>
     <hr>
         <footer>
