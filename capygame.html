@@ -77,6 +77,19 @@
         ctx.imageSmoothingEnabled = false;
         const capybaraSize = 80;
         const gameDuration = 30000; // 30 seconds
+        let timeRemaining = gameDuration / 1000; // Convert to seconds
+
+        function updateTimer() {
+            document.getElementById('timer').textContent = timeRemaining;
+        }
+
+        function countdown() {
+            if (timeRemaining > 0) {
+                timeRemaining--;
+                updateTimer();
+                setTimeout(countdown, 1000); // Decrease the timer every 1000 ms (1 second)
+            }
+        }
 
         let capybaraX = Math.random() * (canvas.width - capybaraSize);
         let capybaraY = Math.random() * (canvas.height - capybaraSize);
@@ -143,6 +156,7 @@
             if (!gameStarted) {
                 gameStarted = true;
                 gameLoop();
+                countdown();
                 setTimeout(() => {
                     gameStarted = false;
                     alert('Game over!');
