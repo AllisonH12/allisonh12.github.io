@@ -60,19 +60,6 @@
         Capybaras Missed: <span id="missed">0</span>
     </div>
     <script>
-        let timeRemaining = gameDuration / 1000; // Convert to seconds
-
-        function updateTimer() {
-            document.getElementById('timer').textContent = timeRemaining;
-        }
-
-        function countdown() {
-            if (timeRemaining > 0) {
-                timeRemaining--;
-                updateTimer();
-                setTimeout(countdown, 1000); // Decrease the timer every 1000 ms (1 second)
-            }
-        }
         //const canvas = document.getElementById('gameCanvas');
         const gameContainer = document.getElementById('gameContainer');
         const canvas = document.createElement('canvas');
