@@ -15,20 +15,9 @@
             height: auto;
             border: 1px solid black;
         }
-
-        #stats {
-            display: flex;
-            justify-content: space-around;
-            font-size: 18px;
-            margin-bottom: 1rem;
-        }
-
         .score {
-            font-size: 18px;
+            font-size: 24px;
         }
-
-
-
             /* Add the following styles */
         #gameContainer {
             position: relative;
@@ -57,20 +46,19 @@
     </style>
 </head>
 <body>
-    <h1>Whack a Capybara</h1>    
+    <h1>Whack a Capybara</h1>
+    <div class="timer">
+        Time Remaining: <span id="timer">30</span> seconds
+    </div>
+    
     <div id="gameContainer">
     </div>
-    <div id="stats">
-        <div class="score">
-            Whacked: <span id="whacked">0</span>
-            <br>
-            Missed: <span id="missed">0</span>
-        </div>
-        <div class="timer">
-            Time Left: <span id="timer">30</span> seconds
-        </div>
-    </div>    
-
+    
+    <div class="score">
+        Capybaras Whacked: <span id="whacked">0</span>
+        <br>
+        Capybaras Missed: <span id="missed">0</span>
+    </div>
     <script>
         let timeRemaining = gameDuration / 1000; // Convert to seconds
 
@@ -168,7 +156,6 @@
             if (!gameStarted) {
                 gameStarted = true;
                 gameLoop();
-                countdown();
                 setTimeout(() => {
                     gameStarted = false;
                     alert('Game over!');
