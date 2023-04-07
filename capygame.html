@@ -77,6 +77,26 @@
         Missed: <span id="missed">0</span>
     </div>
     <script>
+
+        //const canvas = document.getElementById('gameCanvas');
+        const gameContainer = document.getElementById('gameContainer');
+        const canvas = document.createElement('canvas');
+        // Add this line after creating the canvas element
+        canvas.id = 'gameCanvas';
+        // Calculate the actual width and height based on the gameContainer size
+        const actualWidth = gameContainer.clientWidth;
+        const actualHeight = gameContainer.clientHeight;
+
+        canvas.width = actualWidth;
+        canvas.height = actualHeight;
+        gameContainer.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        const capybaraSize = 80;
+        const gameDuration = 30000; // 30 seconds
+        let timeRemaining = gameDuration / 1000; // Convert to seconds
+
         const randomAnimals = ['rat.png', 'monkey.png', 'sonic.png','chick.png'];
         // Load the random animal images
         const randomAnimalImages = randomAnimals.map(src => {
@@ -108,25 +128,6 @@
         }
 
 
-
-        //const canvas = document.getElementById('gameCanvas');
-        const gameContainer = document.getElementById('gameContainer');
-        const canvas = document.createElement('canvas');
-        // Add this line after creating the canvas element
-        canvas.id = 'gameCanvas';
-        // Calculate the actual width and height based on the gameContainer size
-        const actualWidth = gameContainer.clientWidth;
-        const actualHeight = gameContainer.clientHeight;
-
-        canvas.width = actualWidth;
-        canvas.height = actualHeight;
-        gameContainer.appendChild(canvas);
-
-        const ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = false;
-        const capybaraSize = 80;
-        const gameDuration = 30000; // 30 seconds
-        let timeRemaining = gameDuration / 1000; // Convert to seconds
 
         function updateTimer() {
             document.getElementById('timer').textContent = timeRemaining;
