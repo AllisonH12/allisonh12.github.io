@@ -57,7 +57,12 @@ function playAudio() {
 function changeBackground() {
     var selector = document.getElementById('backgroundSelector');
     var modelViewer = document.getElementById('capyModelViewer');
-    modelViewer.setAttribute('skybox-image', selector.value);
+
+    // Updated method to change the environment image
+    const environmentImageURL = selector.value; // URL of the new environment image
+    modelViewer.environmentImage = environmentImageURL;
+    modelViewer.skyboxImage = environmentImageURL; // Optionally set skyboxImage if needed
+    modelViewer.dispatchEvent(new CustomEvent('environment-change')); // Force update if necessary
 }
 </script>
 <hr>
