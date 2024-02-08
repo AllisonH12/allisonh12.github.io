@@ -29,9 +29,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 <a href="capy3d.usdz" rel="ar">View in AR (tested with iPhone)</a> 
 
 <model-viewer src="capy3d.glb" alt="A 3D model of capybara" auto-rotate camera-controls skybox-image="b3.webp"></model-viewer>
-  
+    <select id="backgroundSelector" onchange="changeBackground()">
+    <option value="b3.webp">Default Background</option>
+    <option value="b1.webp">Background 1</option>
+    <option value="b2.webp">Background 2</option>
+    <option value="bgreen.webp">Background 3</option>
+    <option value="backgreen.webp">Background 4</option>
+    <!-- Add more options as needed -->
+</select>
+    
 <audio id="myAudio" src="capy.mp3" preload="auto"></audio>
 <button onclick="playAudio()">Hear Capybara Sound</button>
+    
 
 <script>
 function playAudio() {
@@ -44,6 +53,11 @@ function playAudio() {
         console.error("Error occurred when trying to play audio:", error);
         // Handle the error, possibly by showing an error message to the user
     });
+}
+function changeBackground() {
+    var selector = document.getElementById('backgroundSelector');
+    var modelViewer = document.getElementById('capyModelViewer');
+    modelViewer.setAttribute('skybox-image', selector.value);
 }
 </script>
 <hr>
