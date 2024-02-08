@@ -3,6 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Display</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
+    <style>
+        model-viewer {
+            width: 100%; /* Adjust the width as needed */
+            height: 600px; /* Adjust the height as needed */
+            --model-viewer-background-color: #eaeaea; /* Optional: Change the background color */
+        }
+    </style>
+</head>
+<body>
+<a href="https://github.huangallison.com/capybara3d.glb" target="_blank">Capybard 3D model</a>
+
+
+<model-viewer src="capybara3d.glb" alt="A 3D model of capybara" auto-rotate camera-controls environment-image="path/to/an/environment-image.hdr"></model-viewer>
+
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Model Capybara</title>
     <script type="module">
         import '@google/model-viewer/dist/model-viewer.js';
