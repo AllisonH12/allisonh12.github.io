@@ -27,13 +27,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 <a href="https://github.huangallison.com/capybara3d.glb" target="_blank">Download Capybara 3D model</a>
 <BR>
 <a href="capy3d.usdz" rel="ar">View in AR (tested with iPhone)</a> 
-<BR>
-<button onclick="playAudio()">Hear Capybara Sound</button>
 
 <model-viewer src="capy3d.glb" alt="A 3D model of capybara" auto-rotate camera-controls></model-viewer>
   
 <audio id="myAudio" src="capy.mp3" preload="auto"></audio>
-
+<button onclick="playAudio()">Hear Capybara Sound</button>
 
 <script>
 function playAudio() {
