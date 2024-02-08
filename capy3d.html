@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Capybara</title>
+    <script type="module">
+        import '@google/model-viewer/dist/model-viewer.js';
+    </script>
+    <style>
+        model-viewer {
+            width: 100%; /* Adjust the width as needed */
+            height: 600px; /* Adjust the height as needed */
+            --model-viewer-background-color: #eaeaea; /* Optional: Change the background color */
+        }
+    </style>
+</head>
+<body>
+
+<model-viewer src="capybara3d.glb" alt="A 3D model of capybara" auto-rotate camera-controls environment-image="path/to/an/environment-image.hdr"></model-viewer>
+
+</body>
+</html>
