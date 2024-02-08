@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capybara 3D Model</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
+    <script>
+window.addEventListener('DOMContentLoaded', (event) => {
+    var audio = document.getElementById('myAudio');
+    audio.play()
+    .catch(error => {
+        console.log("Auto-play was prevented by the browser.");
+        // Handle the situation where auto-play was not allowed
+    });
+});
+</script>
     <style>
         model-viewer {
             width: 100%; /* Adjust the width as needed */
@@ -19,8 +29,11 @@
 <a href="capy3d.usdz" rel="ar">View in AR (tested with iPhone)</a>
 
 <model-viewer src="capy3d.glb" alt="A 3D model of capybara" auto-rotate camera-controls></model-viewer>
+  
+<audio id="myAudio" src="capy.mp3" preload="auto"></audio>
 
 <hr>
+    
 <footer>
     <a href="https://capychat.co" target="_blank">CapyChat</a> |  
     <a href="https://draw.capychat.co" target="_blank">CapyDraw</a> | 
