@@ -87,11 +87,12 @@
     </div>
   </div>
   <div class="vote-form">
-    <button class="vote-button" onclick="vote('Capy')">Vote Capy</button>   
+    <button class="vote-button" id="vote-capy">Vote Capy</button> 
     <span style="margin: 0 100px;">or</span>
-    <button class="vote-button" onclick="vote('Dog')">Vote Dog</button>
+    <button class="vote-button" id="vote-dog">Vote Dog</button>
   </div>
   <hr>
+  <br>
   <footer>
       <a href="https://capychat.co" target="_blank">CapyChat</a> 
       <a href="https://draw.capychat.co" target="_blank">CapyDraw</a> 
@@ -147,8 +148,15 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    const capyButton = document.getElementById('vote-capy');
+    const dogButton = document.getElementById('vote-dog');
+
+    capyButton.addEventListener('click', () => vote('Capy'));
+    dogButton.addEventListener('click', () => vote('Dog'));
+
     displayVotes();
   });
+
 </script>
 </body>
 </html>
