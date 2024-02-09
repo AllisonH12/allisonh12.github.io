@@ -53,10 +53,24 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    #vote-display {
+    .vote-display {
       font-size: 24px; /* Adjust the font size as needed */
       font-weight: bold; /* Make the text bold */
       margin: 20px 0; /* Add some space around the text */
+    }
+    .footer {
+      display: flex;
+      justify-content: space-around; /* This spreads out the footer items */
+      align-items: center; /* This vertically centers the footer items */
+      width: 100%; /* Ensure the footer spans the full width of its container */
+      padding: 20px 0; /* Add some padding above and below the footer items */
+      border-top: 2px solid #034203; /* Add a line above the footer */
+    }
+
+    .footer a {
+      color: #034203; /* Adjust the link color as needed */
+      text-decoration: none; /* Optional: removes the underline from links */
+      margin: 0 10px; /* Add space between the links */
     }
 
     .vote-button:hover {
@@ -97,15 +111,16 @@
     <span style="margin: 0 100px;">or</span>
     <button class="vote-button" id="vote-dog">Vote Dog</button>
   </div>
-  <hr>
+  
   <br>
-  <footer>
-      <a href="https://capychat.co" target="_blank">CapyChat</a> 
-      <a href="https://draw.capychat.co" target="_blank">CapyDraw</a> 
-      <a href="https://github.huangallison.com/capygame.html" target="_blank">CapyGame</a> 
-      <a href="https://github.huangallison.com/cuteornot.html" target="_blank">Capy vs Dog</a> 
-      <a href="https://github.huangallison.com/capy3d.html" target="_blank">Capy3D</a>
+  <footer class="footer">
+  <a href="https://capychat.co" target="_blank">CapyChat</a> 
+  <a href="https://draw.capychat.co" target="_blank">CapyDraw</a> 
+  <a href="https://github.huangallison.com/capygame.html" target="_blank">CapyGame</a> 
+  <a href="https://github.huangallison.com/cuteornot.html" target="_blank">Capy vs Dog</a> 
+  <a href="https://github.huangallison.com/capy3d.html" target="_blank">Capy3D</a>
   </footer>
+
 </div>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
