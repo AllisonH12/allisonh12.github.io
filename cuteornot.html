@@ -3,65 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <title>Capybara vs Dog</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Make body take full viewport height */
-    text-align: center;
-    color: #034203;
-  }
-  .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .image-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  .image-container {
-    position: relative;
-  }
-  .image-description {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 10px;
-  }
-  .vote-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  .vote-button {
-    font-size: 24px;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .vote-button:hover {
-    background-color: #3e8e41;
-  }
-</style>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Make body take full viewport height */
+      text-align: center;
+      color: #034203;
+    }
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 20px; /* Ensure there's space between the images */
+    }
+    .image-container {
+      position: relative;
+    }
+    .image-description {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 10px;
+    }
+    .vote-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .vote-button {
+      font-size: 24px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .vote-button:hover {
+      background-color: #3e8e41;
+    }
+  </style>
 </head>
 <body>
 <div class="main-container">
   <h1>Cute or Not: Capybara vs Dog</h1>
   <div id="vote-display">Capy: 0 vs Dog: 0</div>
-  <div class="image-row" style="max-width: 1000px; gap: 20px;">
+  <div class="image-row">
     <div class="image-container">
       <div class="image-description">Capybara</div>
       <img id="capy-image" alt="Capybara picture" title="Capybara" style="max-width: 500px; height: 300px; object-fit: cover;" src="https://api.capy.lol/v1/capybara">
@@ -70,44 +71,13 @@
       <div class="image-description">Dog</div>
       <img id="dog-image" alt="Random dog picture" title="dog"
       style="max-width: 500px; height: 300px; object-fit: cover;">
-    <script>
-      // Fetch a random dog picture from the API
-      fetch('https://dog.ceo/api/breeds/image/random')
-        .then(response => response.json())
-        .then(data => {
-          // Extract the image URL from the response
-          const imageUrl = data.message;
-          // Set the image source to the extracted URL
-          const image = document.getElementById('dog-image');
-          image.src = imageUrl;
-        })
-        .catch(error => console.error(error));
-    </script>
     </div>
   </div>
-  <div class="vote-form" style="max-width: 1000px";>
-    <button onclick="voteOption('Capy')">Vote Capy</button>   
+  <div class="vote-form">
+    <button class="vote-button" onclick="vote('Capy')">Vote Capy</button>   
     <span style="margin: 0 100px;">or</span>
-    <button onclick="voteOption('Dog')">Vote Dog</button>
+    <button class="vote-button" onclick="vote('Dog')">Vote Dog</button>
   </div>
-  <script>
-
-    function vote(voteValue) {
-      const xhr = new XMLHttpRequest();
-
-      xhr.onreadystatechange = function() {
-       // if (this.readyState === 4 && this.status === 200) {
-        if (1) {
-          //alert('Vote received: ' + voteValue);
-          location.reload();
-        }
-      };
-      xhr.open('POST', '/vote', true);
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xhr.send('vote=' + encodeURIComponent(voteValue));
-    }
-  </script>
-
   <hr>
   <footer>
       <a href="https://capychat.co" target="_blank">CapyChat</a> 
@@ -118,15 +88,9 @@
   </footer>
 </div>
 <script type="module">
-  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
   import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
   
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
     apiKey: "AIzaSyB2ezpERHgs9jNCkXoOOOdnOPZwac9eLcs",
     authDomain: "capy-c98db.firebaseapp.com",
@@ -137,53 +101,41 @@
     measurementId: "G-3XFY3LJYD4"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  // Initialize Firestore
   const db = getFirestore(app);
 
-  // Function to increment a vote
   async function vote(option) {
-  const votesRef = doc(db, "votes", "current");
-  const docSnap = await getDoc(votesRef);
+    const votesRef = doc(db, "votes", "current");
+    const docSnap = await getDoc(votesRef);
 
-  if (docSnap.exists()) {
-    // Document exists, update the appropriate vote
-    await updateDoc(votesRef, {
-      [option]: docSnap.data()[option] + 1
-    });
-  } else {
-    // Document does not exist, create it with initial votes
-    await setDoc(votesRef, {
-      Capy: 0,
-      Dog: 0,
-      [option]: 1
-    });
-  }
+    if (docSnap.exists()) {
+      await updateDoc(votesRef, {
+        [option]: docSnap.data()[option] + 1
+      });
+    } else {
+      await setDoc(votesRef, {
+        Capy: option === 'Capy' ? 1 : 0,
+        Dog: option === 'Dog' ? 1 : 0
+      });
+    }
+    displayVotes();
   }
 
-  //Function to display votes
   async function displayVotes() {
-  const votesRef = doc(db, "votes", "current");
-  const docSnap = await getDoc(votesRef);
+    const votesRef = doc(db, "votes", "current");
+    const docSnap = await getDoc(votesRef);
 
-  if (docSnap.exists()) {
-    const data = docSnap.data();
-    document.getElementById('vote-display').textContent = `Capy: ${data.Capy} vs Dog: ${data.Dog}`;
-  } else {
-    document.getElementById('vote-display').textContent = "Capy: 0 vs Dog: 0";
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      document.getElementById('vote-display').textContent = `Capy: ${data.Capy || 0} vs Dog: ${data.Dog || 0}`;
+    } else {
+      document.getElementById('vote-display').textContent = "Capy: 0 vs Dog: 0";
+    }
   }
-  }
 
-// Call this function to update the vote counts on your page
-// displayVotes();
-
-// Example usage
-// vote('Capy');
-// vote('Dog');
-
-  
+  document.addEventListener('DOMContentLoaded', () => {
+    displayVotes();
+  });
 </script>
 </body>
 </html>
