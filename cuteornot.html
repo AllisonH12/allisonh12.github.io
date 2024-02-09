@@ -71,6 +71,19 @@
       <div class="image-description">Dog</div>
       <img id="dog-image" alt="Random dog picture" title="dog"
       style="max-width: 500px; height: 300px; object-fit: cover;">
+      <script>
+      // Fetch a random dog picture from the API
+      fetch('https://dog.ceo/api/breeds/image/random')
+        .then(response => response.json())
+        .then(data => {
+          // Extract the image URL from the response
+          const imageUrl = data.message;
+          // Set the image source to the extracted URL
+          const image = document.getElementById('dog-image');
+          image.src = imageUrl;
+        })
+        .catch(error => console.error(error));
+    </script>
     </div>
   </div>
   <div class="vote-form">
