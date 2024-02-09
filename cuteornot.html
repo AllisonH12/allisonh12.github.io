@@ -125,21 +125,28 @@
   const db = getFirestore(app);
 
   async function vote(option) {
-    const votesRef = doc(db, "votes", "current");
+  const votesRef = doc(db, "votes", "current");
+  try {
     const docSnap = await getDoc(votesRef);
-
     if (docSnap.exists()) {
       await updateDoc(votesRef, {
         [option]: docSnap.data()[option] + 1
       });
     } else {
+      // Assuming initial setup for both options
       await setDoc(votesRef, {
         Capy: option === 'Capy' ? 1 : 0,
         Dog: option === 'Dog' ? 1 : 0
       });
     }
-    displayVotes();
+    // After the vote is recorded, reload the page to reflect the changes
+    location.reload();
+  } catch (error) {
+    console.error("Error voting:", error);
+    // Optionally handle the error (e.g., show an error message to the user)
   }
+  }
+
 
   async function displayVotes() {
     const votesRef = doc(db, "votes", "current");
