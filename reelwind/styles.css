@@ -48,7 +48,7 @@ header {
 .media-transformation {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Adjusts alignment to handle different image heights */
     gap: 50px;
     padding: 20px;
 }
@@ -56,14 +56,21 @@ header {
 .media-transformation div {
     flex-basis: 50%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Ensures text aligns at the top */
 }
 
 .media-transformation img {
-    max-width: 100%;
-    height: auto;
+    width: 100%; /* Adjust width to be responsive */
+    height: auto; /* Adjust height automatically */
+    max-height: 400px; /* Example fixed height, adjust as needed */
+    object-fit: contain; /* Ensures the entire image fits within the dimensions */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Adds space between the image and the text */
 }
+
 
 h3 {
     margin-top: 0;
