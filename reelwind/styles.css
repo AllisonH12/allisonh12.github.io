@@ -13,10 +13,10 @@ header {
 }
 
 #logo {
-    max-width: 150px; /* Adjust the size of the logo */
+    max-width: 200px; /* Adjust the size of the logo */
     height: auto;
     display: block;
-    margin: 0 auto 10px; /* Center the logo and add some margin below */
+    margin: 0 auto 5px; /* Center the logo and add some margin below */
 }
 
 /* Rest of your CSS remains the same */
