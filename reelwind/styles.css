@@ -12,6 +12,16 @@ header {
     text-align: center;
 }
 
+#logo {
+    max-width: 150px; /* Adjust the size of the logo */
+    height: auto;
+    display: block;
+    margin: 0 auto 10px; /* Center the logo and add some margin below */
+}
+
+/* Rest of your CSS remains the same */
+
+
 /* Apply consistent margin and padding to all h2 elements for uniformity */
 h2 {
     text-align: center;
