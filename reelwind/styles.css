@@ -45,3 +45,26 @@ header {
 .feature p {
     line-height: 1.6;
 }
+.media-transformation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+}
+
+.media-transformation div {
+    flex-basis: 50%;
+    text-align: center;
+}
+
+.media-transformation img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    margin-top: 0;
+}
