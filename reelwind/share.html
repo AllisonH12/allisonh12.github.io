@@ -8,20 +8,21 @@
 </head>
 <body>
     <h2>Share Your Story</h2>
-    <form action="your-server-endpoint" method="post" enctype="multipart/form-data">
+    <form action="MAILTO:allisonhmercer@gmail.com" method="post" enctype="text/plain">
         <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name">
         
         <label for="contact">Your Contact:</label>
-        <input type="text" id="contact" name="contact" required>
+        <input type="text" id="contact" name="contact">
         
         <label for="story">Your Story:</label>
-        <textarea id="story" name="story" rows="5" required></textarea>
+        <textarea id="story" name="story"></textarea>
         
-        <label for="media">Upload Images/Videos:</label>
-        <input type="file" id="media" name="media" accept="image/*,video/*" multiple>
+        <!-- Omitting file upload as it won't work with mailto: -->
         
-        <input type="submit" value="Share Story">
+        <input type="submit" value="Send">
+    </form>
+    
     </form>
 </body>
 </html>
