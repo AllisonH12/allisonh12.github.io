@@ -60,10 +60,25 @@
         </div>
     </section>
     
-    <section id="cta">
-        <button id="join-us">Join Us</button>
-        <button id="share-story">Share Your Story</button>
-    </section>
+    <footer>
+        <div class="footer-content">
+            <p>Email: allisonhmercer@gmail.com</p>
+            <p>ReelWind Inc. © [Current Year]</p> <!-- Dynamically insert the current year using JavaScript -->
+        </div>
+        <div class="footer-cta">
+            <button id="join-us">Join Us</button>
+            <button id="share-story">Share Your Story</button>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Dynamically set the current year in the footer
+        document.addEventListener('DOMContentLoaded', function () {
+            const yearSpan = document.querySelector('.current-year');
+            if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
