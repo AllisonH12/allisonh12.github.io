@@ -7,22 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Share Your Story</h2>
-    <form action="MAILTO:allisonhmercer@gmail.com" method="post" enctype="text/plain">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name">
-        
-        <label for="contact">Your Contact:</label>
-        <input type="text" id="contact" name="contact">
-        
-        <label for="story">Your Story:</label>
-        <textarea id="story" name="story"></textarea>
-        
-        <!-- Omitting file upload as it won't work with mailto: -->
-        
-        <input type="submit" value="Send">
-    </form>
+    <header>
+        <h1>Share Your Story</h1>
+    </header>
+
+    <section class="form-container">
+        <form action="MAILTO:allisonhmercer@gmail.com" method="post" enctype="text/plain">
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Your Contact:</label>
+                <input type="text" id="contact" name="contact" required>
+            </div>
+
+            <div class="form-group">
+                <label for="story">Your Story:</label>
+                <textarea id="story" name="story" required></textarea>
+            </div>
+
+            <input type="submit" value="Send" class="btn">
+        </form>
+    </section>
     
-    </form>
+    <script src="script.js"></script>
 </body>
 </html>
