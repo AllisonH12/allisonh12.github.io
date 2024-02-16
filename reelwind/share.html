@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Story with ReelWind</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Share Your Story</h2>
+    <form action="your-server-endpoint" method="post" enctype="multipart/form-data">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="contact">Your Contact:</label>
+        <input type="text" id="contact" name="contact" required>
+        
+        <label for="story">Your Story:</label>
+        <textarea id="story" name="story" rows="5" required></textarea>
+        
+        <label for="media">Upload Images/Videos:</label>
+        <input type="file" id="media" name="media" accept="image/*,video/*" multiple>
+        
+        <input type="submit" value="Share Story">
+    </form>
+</body>
+</html>
