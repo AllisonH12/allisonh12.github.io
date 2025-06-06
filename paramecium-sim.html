@@ -38,13 +38,16 @@
         }
 
         .controls.collapsed {
-            transform: translateY(calc(-100% + 60px));
+            transform: translateY(calc(-100% + 65px));
         }
 
         .controls.collapsed .control-grid,
         .controls.collapsed .legend {
-            opacity: 0;
-            pointer-events: none;
+            display: none;
+        }
+
+        .controls.collapsed .controls-header {
+            margin-bottom: 0;
         }
 
         .controls.collapsed .toggle-controls {
@@ -67,6 +70,10 @@
             margin: 0;
         }
 
+        .control-grid, .legend {
+            transition: opacity 0.3s ease;
+        }
+
         .toggle-controls {
             display: none;
             background: rgba(255,255,255,0.1);
@@ -75,6 +82,13 @@
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-controls:hover, .toggle-controls:active {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
         }
 
         .control-grid {
@@ -350,7 +364,7 @@
         <div class="controls" id="controls">
             <div class="controls-header">
                 <h1>🦠 Paramecium Simulation</h1>
-                <button class="toggle-controls" onclick="toggleControlPanel()">☰ Menu</button>
+                <button class="toggle-controls" onclick="event.stopPropagation(); toggleControlPanel()">☰ Menu</button>
             </div>
             <div class="control-grid">
                 <div class="control-group">
@@ -360,18 +374,18 @@
                 </div>
                 <div class="control-group">
                     <h3>Chemicals</h3>
-                    <button onclick="setChemicalType('repellent')">Toxin</button>
-                    <button onclick="setChemicalType('attractant')">Food</button>
+                    <button onclick="setChemicalType('repellent', event)">Toxin</button>
+                    <button onclick="setChemicalType('attractant', event)">Food</button>
                 </div>
                 <div class="control-group">
                     <h3>pH Solutions</h3>
-                    <button class="ph-button" onclick="setChemicalType('ph-acidic')">
+                    <button class="ph-button" onclick="setChemicalType('ph-acidic', event)">
                         Acid <span class="ph-value">pH 3</span>
                     </button>
-                    <button class="ph-button" onclick="setChemicalType('ph-neutral')">
+                    <button class="ph-button" onclick="setChemicalType('ph-neutral', event)">
                         Neutral <span class="ph-value">pH 7</span>
                     </button>
-                    <button class="ph-button" onclick="setChemicalType('ph-basic')">
+                    <button class="ph-button" onclick="setChemicalType('ph-basic', event)">
                         Base <span class="ph-value">pH 11</span>
                     </button>
                 </div>
@@ -448,7 +462,8 @@
             } else {
                 controls.classList.remove('collapsed');
             }
-            setTimeout(resizeCanvas, 300);
+            // Wait for CSS transition before resizing
+            setTimeout(resizeCanvas, 350);
         }
 
         // Don't auto-collapse on mobile anymore - keep controls visible
@@ -457,7 +472,16 @@
         // Resize canvas
         function resizeCanvas() {
             const controls = document.querySelector('.controls');
-            const controlsHeight = controlsCollapsed ? 60 : controls.offsetHeight;
+            let controlsHeight;
+            
+            if (controlsCollapsed) {
+                // When collapsed, only the header is visible (approximately 65px)
+                controlsHeight = 65;
+            } else {
+                // When expanded, use the full height
+                controlsHeight = controls.offsetHeight;
+            }
+            
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight - controlsHeight;
         }
@@ -742,13 +766,15 @@
             init();
         }
 
-        function setChemicalType(type) {
+        function setChemicalType(type, event) {
             chemicalType = type;
             document.querySelector('.selected-type').textContent = typeNames[type];
             
             // Update button states
             document.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
         }
 
         function clearChemicals() {
