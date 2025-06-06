@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramecium Chemotaxis & pH Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .controls {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .controls h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ff88, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .control-group {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .control-group:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
+        }
+
+        .control-group h3 {
+            margin-bottom: 10px;
+            color: #00ff88;
+            font-size: 0.9rem;
+        }
+
+        button {
+            background: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin: 5px 0;
+            font-size: 0.85rem;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0,255,136,0.4);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button.active {
+            background: linear-gradient(135deg, #ff00ff 0%, #ff0088 100%);
+            box-shadow: 0 0 20px rgba(255,0,255,0.5);
+        }
+
+        .ph-button {
+            position: relative;
+        }
+
+        .ph-value {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+        }
+
+        .legend {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .ph-scale {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .ph-gradient {
+            width: 100px;
+            height: 15px;
+            background: linear-gradient(to right, #ff0000, #ff7700, #ffff00, #00ff00, #0077ff, #0000ff, #7700ff);
+            border-radius: 10px;
+        }
+
+        canvas {
+            background: #000;
+            display: block;
+            cursor: crosshair;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+            max-width: 350px;
+        }
+
+        .info p {
+            margin: 5px 0;
+        }
+
+        .paramecium-count {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .selected-type {
+            color: #ff00ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <h1>🦠 Paramecium Chemotaxis & pH Simulation</h1>
+            <div class="control-grid">
+                <div class="control-group">
+                    <h3>Simulation Controls</h3>
+                    <button onclick="toggleSimulation()">Start/Pause</button>
+                    <button onclick="resetSimulation()">Reset</button>
+                </div>
+                <div class="control-group">
+                    <h3>Add Chemicals</h3>
+                    <button onclick="setChemicalType('repellent')">Toxin (Repellent)</button>
+                    <button onclick="setChemicalType('attractant')">Food (Attractant)</button>
+                </div>
+                <div class="control-group">
+                    <h3>pH Solutions</h3>
+                    <button class="ph-button" onclick="setChemicalType('ph-acidic')">
+                        Strong Acid <span class="ph-value">pH 3</span>
+                    </button>
+                    <button class="ph-button" onclick="setChemicalType('ph-neutral')">
+                        Neutral <span class="ph-value">pH 7</span>
+                    </button>
+                    <button class="ph-button" onclick="setChemicalType('ph-basic')">
+                        Strong Base <span class="ph-value">pH 11</span>
+                    </button>
+                </div>
+                <div class="control-group">
+                    <h3>Clear Options</h3>
+                    <button onclick="clearChemicals()">Clear All Drops</button>
+                    <button onclick="clearParamecia()">Clear Paramecia</button>
+                </div>
+            </div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff4444;"></div>
+                    <span>Toxin</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #44ff44;"></div>
+                    <span>Food</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff0044;"></div>
+                    <span>Acid (pH 3)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #00ff44;"></div>
+                    <span>Neutral (pH 7)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #4400ff;"></div>
+                    <span>Base (pH 11)</span>
+                </div>
+                <div class="ph-scale">
+                    <span style="font-size: 0.8rem;">pH Scale:</span>
+                    <div class="ph-gradient"></div>
+                    <span style="font-size: 0.8rem;">0-14</span>
+                </div>
+            </div>
+        </div>
+        <canvas id="simulation"></canvas>
+        <div class="info">
+            <p>Click to place drops after selecting type</p>
+            <p>Selected: <span class="selected-type">Toxin</span></p>
+            <p>Paramecia: <span class="paramecium-count">25</span></p>
+            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">
+                💡 Paramecia prefer neutral pH (6.5-7.5) and avoid extreme pH levels
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('simulation');
+        const ctx = canvas.getContext('2d');
+        
+        let running = false;
+        let chemicalType = 'repellent';
+        let paramecia = [];
+        let chemicals = [];
+        let animationId;
+
+        // Chemical type display names
+        const typeNames = {
+            'repellent': 'Toxin',
+            'attractant': 'Food',
+            'ph-acidic': 'Strong Acid (pH 3)',
+            'ph-neutral': 'Neutral (pH 7)',
+            'ph-basic': 'Strong Base (pH 11)'
+        };
+
+        // Resize canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight - document.querySelector('.controls').offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Paramecium class
+        class Paramecium {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.angle = Math.random() * Math.PI * 2;
+                this.size = 15;
+                this.speed = 1;
+                this.turnRate = 0.1;
+                this.health = 1; // Health affected by extreme pH
+            }
+
+            update() {
+                // Calculate chemical influences
+                let forceX = 0;
+                let forceY = 0;
+
+                chemicals.forEach(chemical => {
+                    const dx = chemical.x - this.x;
+                    const dy = chemical.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < chemical.radius) {
+                        const strength = 1 - (distance / chemical.radius);
+                        let force = 0;
+                        
+                        // Different responses to different chemicals
+                        switch(chemical.type) {
+                            case 'repellent':
+                                force = -2 * strength;
+                                break;
+                            case 'attractant':
+                                force = 1.5 * strength;
+                                break;
+                            case 'ph-acidic':
+                                // Strong avoidance of extreme acid
+                                force = -2.5 * strength;
+                                if (distance < 30) this.health -= 0.01;
+                                break;
+                            case 'ph-neutral':
+                                // Slight attraction to neutral pH
+                                force = 0.8 * strength;
+                                if (distance < 50) this.health = Math.min(1, this.health + 0.005);
+                                break;
+                            case 'ph-basic':
+                                // Strong avoidance of extreme base
+                                force = -2.5 * strength;
+                                if (distance < 30) this.health -= 0.01;
+                                break;
+                        }
+                        
+                        forceX += (dx / distance) * force;
+                        forceY += (dy / distance) * force;
+                    }
+                });
+
+                // Apply forces with some randomness
+                this.vx += forceX * 0.1 + (Math.random() - 0.5) * 0.5;
+                this.vy += forceY * 0.1 + (Math.random() - 0.5) * 0.5;
+
+                // Reduce speed if health is low
+                const speedModifier = 0.3 + (this.health * 0.7);
+
+                // Limit speed
+                const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                if (speed > this.speed * speedModifier) {
+                    this.vx = (this.vx / speed) * this.speed * speedModifier;
+                    this.vy = (this.vy / speed) * this.speed * speedModifier;
+                }
+
+                // Update position
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Update angle based on velocity
+                if (speed > 0.1) {
+                    this.angle = Math.atan2(this.vy, this.vx);
+                }
+
+                // Bounce off walls
+                if (this.x < this.size || this.x > canvas.width - this.size) {
+                    this.vx *= -1;
+                    this.x = Math.max(this.size, Math.min(canvas.width - this.size, this.x));
+                }
+                if (this.y < this.size || this.y > canvas.height - this.size) {
+                    this.vy *= -1;
+                    this.y = Math.max(this.size, Math.min(canvas.height - this.size, this.y));
+                }
+
+                // Slowly recover health
+                this.health = Math.min(1, this.health + 0.001);
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                
+                // Draw paramecium body (color based on health)
+                const healthColor = Math.floor(255 * this.health);
+                const redComponent = Math.floor(255 * (1 - this.health));
+                ctx.fillStyle = `rgba(${redComponent}, ${healthColor}, ${healthColor}, 0.8)`;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw cilia
+                ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * this.health})`;
+                ctx.lineWidth = 1;
+                for (let i = 0; i < 8; i++) {
+                    const angle = (i / 8) * Math.PI * 2;
+                    ctx.beginPath();
+                    ctx.moveTo(Math.cos(angle) * this.size * 0.8, Math.sin(angle) * this.size * 0.4);
+                    ctx.lineTo(Math.cos(angle) * this.size * 1.2, Math.sin(angle) * this.size * 0.6);
+                    ctx.stroke();
+                }
+                
+                ctx.restore();
+            }
+        }
+
+        // Chemical class
+        class Chemical {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type;
+                this.radius = 100;
+                this.strength = 1;
+                this.particles = [];
+                
+                // Create floating particles for pH solutions
+                if (type.startsWith('ph-')) {
+                    for (let i = 0; i < 15; i++) {
+                        this.particles.push({
+                            angle: Math.random() * Math.PI * 2,
+                            distance: Math.random() * this.radius,
+                            speed: 0.5 + Math.random() * 0.5
+                        });
+                    }
+                }
+            }
+
+            update() {
+                // Update floating particles
+                this.particles.forEach(p => {
+                    p.angle += p.speed * 0.02;
+                });
+            }
+
+            draw() {
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                
+                // Set colors based on type
+                switch(this.type) {
+                    case 'repellent':
+                        gradient.addColorStop(0, 'rgba(255, 68, 68, 0.5)');
+                        gradient.addColorStop(1, 'rgba(255, 68, 68, 0)');
+                        break;
+                    case 'attractant':
+                        gradient.addColorStop(0, 'rgba(68, 255, 68, 0.5)');
+                        gradient.addColorStop(1, 'rgba(68, 255, 68, 0)');
+                        break;
+                    case 'ph-acidic':
+                        gradient.addColorStop(0, 'rgba(255, 0, 68, 0.6)');
+                        gradient.addColorStop(0.5, 'rgba(255, 0, 68, 0.3)');
+                        gradient.addColorStop(1, 'rgba(255, 0, 68, 0)');
+                        break;
+                    case 'ph-neutral':
+                        gradient.addColorStop(0, 'rgba(0, 255, 68, 0.5)');
+                        gradient.addColorStop(1, 'rgba(0, 255, 68, 0)');
+                        break;
+                    case 'ph-basic':
+                        gradient.addColorStop(0, 'rgba(68, 0, 255, 0.6)');
+                        gradient.addColorStop(0.5, 'rgba(68, 0, 255, 0.3)');
+                        gradient.addColorStop(1, 'rgba(68, 0, 255, 0)');
+                        break;
+                }
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw pH particles
+                if (this.type.startsWith('ph-')) {
+                    ctx.fillStyle = this.type === 'ph-acidic' ? 'rgba(255, 100, 100, 0.6)' :
+                                   this.type === 'ph-neutral' ? 'rgba(100, 255, 100, 0.6)' :
+                                   'rgba(100, 100, 255, 0.6)';
+                    
+                    this.particles.forEach(p => {
+                        const x = this.x + Math.cos(p.angle) * p.distance;
+                        const y = this.y + Math.sin(p.angle) * p.distance;
+                        ctx.beginPath();
+                        ctx.arc(x, y, 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                }
+                
+                // Draw center with pH label
+                const centerColor = {
+                    'repellent': '#ff4444',
+                    'attractant': '#44ff44',
+                    'ph-acidic': '#ff0044',
+                    'ph-neutral': '#00ff44',
+                    'ph-basic': '#4400ff'
+                }[this.type];
+                
+                ctx.fillStyle = centerColor;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw pH value
+                if (this.type.startsWith('ph-')) {
+                    ctx.fillStyle = '#fff';
+                    ctx.font = 'bold 10px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    const phValue = this.type === 'ph-acidic' ? '3' :
+                                   this.type === 'ph-neutral' ? '7' : '11';
+                    ctx.fillText(phValue, this.x, this.y);
+                }
+            }
+        }
+
+        // Initialize simulation
+        function init() {
+            // Create initial paramecia
+            for (let i = 0; i < 25; i++) {
+                paramecia.push(new Paramecium(
+                    Math.random() * canvas.width,
+                    Math.random() * canvas.height
+                ));
+            }
+            updateParameciumCount();
+        }
+
+        // Animation loop
+        function animate() {
+            if (!running) return;
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Update and draw chemicals
+            chemicals.forEach(chemical => {
+                if (chemical.update) chemical.update();
+                chemical.draw();
+            });
+            
+            // Update and draw paramecia
+            paramecia.forEach(paramecium => {
+                paramecium.update();
+                paramecium.draw();
+            });
+            
+            // Remove dead paramecia (health <= 0)
+            paramecia = paramecia.filter(p => p.health > 0);
+            updateParameciumCount();
+            
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // Control functions
+        function toggleSimulation() {
+            running = !running;
+            if (running) animate();
+        }
+
+        function resetSimulation() {
+            running = false;
+            paramecia = [];
+            chemicals = [];
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            init();
+        }
+
+        function setChemicalType(type) {
+            chemicalType = type;
+            document.querySelector('.selected-type').textContent = typeNames[type];
+            
+            // Update button states
+            document.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function clearChemicals() {
+            chemicals = [];
+        }
+
+        function clearParamecia() {
+            paramecia = [];
+            updateParameciumCount();
+        }
+
+        function updateParameciumCount() {
+            document.querySelector('.paramecium-count').textContent = paramecia.length;
+        }
+
+        // Mouse click handler
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            chemicals.push(new Chemical(x, y, chemicalType));
+        });
+
+        // Initialize
+        init();
+    </script>
+</body>
+</html>
