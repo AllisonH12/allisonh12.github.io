@@ -34,74 +34,28 @@
             padding: 15px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             z-index: 10;
-            transition: transform 0.3s ease;
-        }
-
-        .controls.collapsed {
-            transform: translateY(calc(-100% + 65px));
-        }
-
-        .controls.collapsed .control-grid,
-        .controls.collapsed .legend {
-            display: none;
-        }
-
-        .controls.collapsed .controls-header {
-            margin-bottom: 0;
-        }
-
-        .controls.collapsed .toggle-controls {
-            background: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
-            color: #000;
-        }
-
-        .controls-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
         }
 
         .controls h1 {
+            text-align: center;
+            margin-bottom: 20px;
             background: linear-gradient(45deg, #00ff88, #00ffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: clamp(1.2rem, 4vw, 2rem);
-            margin: 0;
-        }
-
-        .control-grid, .legend {
-            transition: opacity 0.3s ease;
-        }
-
-        .toggle-controls {
-            display: none;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-controls:hover, .toggle-controls:active {
-            background: rgba(255,255,255,0.2);
-            transform: scale(1.05);
+            font-size: 2rem;
         }
 
         .control-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .control-group {
             background: rgba(255,255,255,0.05);
-            padding: 12px;
+            padding: 15px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.1);
@@ -114,24 +68,23 @@
         }
 
         .control-group h3 {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #00ff88;
-            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-size: 0.9rem;
         }
 
         button {
             background: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
             color: #000;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
             width: 100%;
-            margin: 4px 0;
-            font-size: clamp(0.75rem, 2vw, 0.85rem);
-            min-height: 44px;
+            margin: 5px 0;
+            font-size: 0.85rem;
             touch-action: manipulation;
         }
 
@@ -157,27 +110,27 @@
             background: rgba(0,0,0,0.3);
             padding: 2px 6px;
             border-radius: 3px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
         }
 
         .legend {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 10px;
-            font-size: clamp(0.7rem, 2vw, 0.85rem);
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            font-size: 0.85rem;
         }
 
         .legend-color {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             box-shadow: 0 0 10px currentColor;
         }
@@ -185,15 +138,15 @@
         .ph-scale {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             background: rgba(255,255,255,0.05);
-            padding: 4px 12px;
+            padding: 5px 15px;
             border-radius: 20px;
         }
 
         .ph-gradient {
-            width: 80px;
-            height: 12px;
+            width: 100px;
+            height: 15px;
             background: linear-gradient(to right, #ff0000, #ff7700, #ffff00, #00ff00, #0077ff, #0000ff, #7700ff);
             border-radius: 10px;
         }
@@ -209,18 +162,17 @@
             position: absolute;
             bottom: 20px;
             left: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.9);
-            padding: 12px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
-            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-size: 0.9rem;
             max-width: 350px;
         }
 
         .info p {
-            margin: 4px 0;
+            margin: 5px 0;
         }
 
         .paramecium-count {
@@ -233,166 +185,170 @@
             font-weight: bold;
         }
 
+        /* Mobile control panel - hidden by default */
+        .mobile-controls {
+            display: none;
+        }
+
         /* Mobile-specific styles */
         @media (max-width: 768px) {
+            /* Hide desktop controls */
             .controls {
-                padding: 10px;
-                max-height: 50vh;
-                overflow-y: auto;
+                display: none;
             }
 
-            .controls-header {
-                margin-bottom: 10px;
-                position: sticky;
-                top: -10px;
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-                padding: 5px 0;
-                z-index: 1;
-            }
-
-            .toggle-controls {
+            /* Show mobile controls */
+            .mobile-controls {
                 display: block;
-            }
-
-            .control-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-
-            .control-group {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
                 padding: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             }
 
-            .control-group h3 {
-                margin-bottom: 5px;
-                font-size: 0.75rem;
+            .mobile-header {
+                text-align: center;
+                margin-bottom: 8px;
             }
 
-            button {
-                padding: 8px 12px;
-                margin: 2px 0;
-                min-height: 40px;
+            .mobile-header h1 {
+                background: linear-gradient(45deg, #00ff88, #00ffff);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 1.2rem;
+                margin: 0;
             }
 
-            .legend {
-                gap: 6px;
-                margin-top: 6px;
-            }
-
-            .legend-item {
+            .mobile-buttons {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
                 gap: 4px;
+                margin-bottom: 6px;
             }
 
-            .legend-color {
-                width: 12px;
-                height: 12px;
+            .mobile-buttons.secondary {
+                grid-template-columns: repeat(4, 1fr);
             }
 
-            .ph-scale {
-                padding: 3px 8px;
-                gap: 5px;
+            .mobile-btn {
+                background: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
+                color: #000;
+                border: none;
+                padding: 8px 4px;
+                border-radius: 4px;
+                font-size: 0.7rem;
+                font-weight: bold;
+                min-height: 36px;
+                cursor: pointer;
+                touch-action: manipulation;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2px;
             }
 
-            .ph-gradient {
-                width: 50px;
-                height: 8px;
+            .mobile-btn.active {
+                background: linear-gradient(135deg, #ff00ff 0%, #ff0088 100%);
+            }
+
+            .mobile-btn.toxin { background: linear-gradient(135deg, #ff4444 0%, #ff6666 100%); }
+            .mobile-btn.food { background: linear-gradient(135deg, #44ff44 0%, #66ff66 100%); }
+            .mobile-btn.acid { background: linear-gradient(135deg, #ff0044 0%, #ff4466 100%); }
+            .mobile-btn.neutral { background: linear-gradient(135deg, #00ff44 0%, #44ff66 100%); }
+            .mobile-btn.base { background: linear-gradient(135deg, #4400ff 0%, #6644ff 100%); }
+
+            .mobile-btn-icon {
+                font-size: 1rem;
+            }
+
+            .mobile-status {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 8px;
+                font-size: 0.8rem;
+                background: rgba(0,0,0,0.3);
+                border-radius: 4px;
+                margin-top: 4px;
             }
 
             .info {
-                bottom: 10px;
-                left: 10px;
-                right: 10px;
-                padding: 8px;
+                display: none;
             }
         }
 
         @media (max-width: 480px) {
-            .control-grid {
-                grid-template-columns: 1fr;
+            .mobile-buttons {
+                grid-template-columns: repeat(4, 1fr);
             }
 
-            .controls h1 {
-                font-size: 1.2rem;
+            .mobile-buttons.secondary {
+                grid-template-columns: repeat(3, 1fr);
             }
 
-            .legend {
-                font-size: 0.7rem;
-            }
-
-            .ph-scale span {
+            .mobile-btn {
                 font-size: 0.65rem;
+                padding: 6px 2px;
             }
         }
 
         /* Landscape mobile */
         @media (max-height: 500px) and (orientation: landscape) {
-            .controls {
-                padding: 8px;
+            .mobile-controls {
+                padding: 4px;
             }
 
-            .controls-header {
-                margin-bottom: 5px;
+            .mobile-header h1 {
+                font-size: 1rem;
             }
 
-            .control-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
+            .mobile-buttons {
+                grid-template-columns: repeat(7, 1fr);
             }
 
-            .control-group {
-                padding: 8px;
+            .mobile-btn {
+                min-height: 32px;
+                font-size: 0.65rem;
             }
 
-            button {
-                padding: 8px 12px;
-                min-height: 36px;
-            }
-
-            .legend {
-                margin-top: 5px;
-            }
-
-            .info {
-                bottom: 5px;
-                padding: 8px;
+            .mobile-status {
+                font-size: 0.7rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="controls" id="controls">
-            <div class="controls-header">
-                <h1>🦠 Paramecium Simulation</h1>
-                <button class="toggle-controls" onclick="event.stopPropagation(); toggleControlPanel()">☰ Menu</button>
-            </div>
+        <!-- Desktop Controls -->
+        <div class="controls">
+            <h1>🦠 Paramecium Chemotaxis & pH Simulation</h1>
             <div class="control-grid">
                 <div class="control-group">
-                    <h3>Simulation</h3>
+                    <h3>Simulation Controls</h3>
                     <button onclick="toggleSimulation()">Start/Pause</button>
                     <button onclick="resetSimulation()">Reset</button>
                 </div>
                 <div class="control-group">
-                    <h3>Chemicals</h3>
-                    <button onclick="setChemicalType('repellent', event)">Toxin</button>
-                    <button onclick="setChemicalType('attractant', event)">Food</button>
+                    <h3>Add Chemicals</h3>
+                    <button onclick="setChemicalType('repellent', event)">Toxin (Repellent)</button>
+                    <button onclick="setChemicalType('attractant', event)">Food (Attractant)</button>
                 </div>
                 <div class="control-group">
                     <h3>pH Solutions</h3>
                     <button class="ph-button" onclick="setChemicalType('ph-acidic', event)">
-                        Acid <span class="ph-value">pH 3</span>
+                        Strong Acid <span class="ph-value">pH 3</span>
                     </button>
                     <button class="ph-button" onclick="setChemicalType('ph-neutral', event)">
                         Neutral <span class="ph-value">pH 7</span>
                     </button>
                     <button class="ph-button" onclick="setChemicalType('ph-basic', event)">
-                        Base <span class="ph-value">pH 11</span>
+                        Strong Base <span class="ph-value">pH 11</span>
                     </button>
                 </div>
                 <div class="control-group">
-                    <h3>Clear</h3>
-                    <button onclick="clearChemicals()">Clear Drops</button>
-                    <button onclick="clearParamecia()">Clear Cells</button>
+                    <h3>Clear Options</h3>
+                    <button onclick="clearChemicals()">Clear All Drops</button>
+                    <button onclick="clearParamecia()">Clear Paramecia</button>
                 </div>
             </div>
             <div class="legend">
@@ -406,29 +362,83 @@
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="background: #ff0044;"></div>
-                    <span>Acid</span>
+                    <span>Acid (pH 3)</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="background: #00ff44;"></div>
-                    <span>Neutral</span>
+                    <span>Neutral (pH 7)</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="background: #4400ff;"></div>
-                    <span>Base</span>
+                    <span>Base (pH 11)</span>
                 </div>
                 <div class="ph-scale">
-                    <span>pH:</span>
+                    <span style="font-size: 0.8rem;">pH Scale:</span>
                     <div class="ph-gradient"></div>
-                    <span>0-14</span>
+                    <span style="font-size: 0.8rem;">0-14</span>
                 </div>
             </div>
         </div>
+
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+            <div class="mobile-header">
+                <h1>🦠 Paramecium Simulation</h1>
+            </div>
+            <div class="mobile-buttons">
+                <button class="mobile-btn toxin" onclick="setChemicalType('repellent', event)">
+                    <span class="mobile-btn-icon">☠️</span>
+                    <span>Toxin</span>
+                </button>
+                <button class="mobile-btn food" onclick="setChemicalType('attractant', event)">
+                    <span class="mobile-btn-icon">🍕</span>
+                    <span>Food</span>
+                </button>
+                <button class="mobile-btn acid" onclick="setChemicalType('ph-acidic', event)">
+                    <span class="mobile-btn-icon">🔴</span>
+                    <span>pH 3</span>
+                </button>
+                <button class="mobile-btn neutral" onclick="setChemicalType('ph-neutral', event)">
+                    <span class="mobile-btn-icon">🟢</span>
+                    <span>pH 7</span>
+                </button>
+                <button class="mobile-btn base" onclick="setChemicalType('ph-basic', event)">
+                    <span class="mobile-btn-icon">🔵</span>
+                    <span>pH 11</span>
+                </button>
+            </div>
+            <div class="mobile-buttons secondary">
+                <button class="mobile-btn" onclick="toggleSimulation()">
+                    <span class="mobile-btn-icon">▶️</span>
+                    <span>Play</span>
+                </button>
+                <button class="mobile-btn" onclick="resetSimulation()">
+                    <span class="mobile-btn-icon">🔄</span>
+                    <span>Reset</span>
+                </button>
+                <button class="mobile-btn" onclick="clearChemicals()">
+                    <span class="mobile-btn-icon">💧</span>
+                    <span>Clear</span>
+                </button>
+                <button class="mobile-btn" onclick="clearParamecia()">
+                    <span class="mobile-btn-icon">🦠</span>
+                    <span>Clear</span>
+                </button>
+            </div>
+            <div class="mobile-status">
+                <span>Selected: <span class="selected-type">Toxin</span></span>
+                <span>Cells: <span class="paramecium-count">25</span></span>
+            </div>
+        </div>
+
         <canvas id="simulation"></canvas>
+        
         <div class="info">
-            <p>Tap/Click to place: <span class="selected-type">Toxin</span></p>
+            <p>Click to place drops after selecting type</p>
+            <p>Selected: <span class="selected-type">Toxin</span></p>
             <p>Paramecia: <span class="paramecium-count">25</span></p>
-            <p style="font-size: 0.8em; margin-top: 8px; opacity: 0.8;">
-                💡 Cells prefer pH 6.5-7.5
+            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">
+                💡 Paramecia prefer neutral pH (6.5-7.5) and avoid extreme pH levels
             </p>
         </div>
     </div>
@@ -442,7 +452,6 @@
         let paramecia = [];
         let chemicals = [];
         let animationId;
-        let controlsCollapsed = false;
 
         // Chemical type display names
         const typeNames = {
@@ -453,32 +462,15 @@
             'ph-basic': 'Base (pH 11)'
         };
 
-        // Toggle control panel for mobile
-        function toggleControlPanel() {
-            controlsCollapsed = !controlsCollapsed;
-            const controls = document.getElementById('controls');
-            if (controlsCollapsed) {
-                controls.classList.add('collapsed');
-            } else {
-                controls.classList.remove('collapsed');
-            }
-            // Wait for CSS transition before resizing
-            setTimeout(resizeCanvas, 350);
-        }
-
-        // Don't auto-collapse on mobile anymore - keep controls visible
-        // Users can manually collapse if they want more space
-
         // Resize canvas
         function resizeCanvas() {
-            const controls = document.querySelector('.controls');
-            let controlsHeight;
+            const controls = document.querySelector('.controls:not(.mobile-controls)');
+            const mobileControls = document.querySelector('.mobile-controls');
+            let controlsHeight = 0;
             
-            if (controlsCollapsed) {
-                // When collapsed, only the header is visible (approximately 65px)
-                controlsHeight = 65;
-            } else {
-                // When expanded, use the full height
+            if (window.innerWidth <= 768 && mobileControls) {
+                controlsHeight = mobileControls.offsetHeight;
+            } else if (controls) {
                 controlsHeight = controls.offsetHeight;
             }
             
@@ -516,7 +508,6 @@
                         const strength = 1 - (distance / chemical.radius);
                         let force = 0;
                         
-                        // Different responses to different chemicals
                         switch(chemical.type) {
                             case 'repellent':
                                 force = -2 * strength;
@@ -585,7 +576,7 @@
                 ctx.translate(this.x, this.y);
                 ctx.rotate(this.angle);
                 
-                // Draw paramecium body (color based on health)
+                // Draw paramecium body
                 const healthColor = Math.floor(255 * this.health);
                 const redComponent = Math.floor(255 * (1 - this.health));
                 ctx.fillStyle = `rgba(${redComponent}, ${healthColor}, ${healthColor}, 0.8)`;
@@ -618,7 +609,6 @@
                 this.strength = 1;
                 this.particles = [];
                 
-                // Create floating particles for pH solutions
                 if (type.startsWith('ph-')) {
                     for (let i = 0; i < 10; i++) {
                         this.particles.push({
@@ -631,7 +621,6 @@
             }
 
             update() {
-                // Update floating particles
                 this.particles.forEach(p => {
                     p.angle += p.speed * 0.02;
                 });
@@ -640,7 +629,6 @@
             draw() {
                 const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
                 
-                // Set colors based on type
                 switch(this.type) {
                     case 'repellent':
                         gradient.addColorStop(0, 'rgba(255, 68, 68, 0.5)');
@@ -671,7 +659,6 @@
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Draw pH particles
                 if (this.type.startsWith('ph-')) {
                     ctx.fillStyle = this.type === 'ph-acidic' ? 'rgba(255, 100, 100, 0.6)' :
                                    this.type === 'ph-neutral' ? 'rgba(100, 255, 100, 0.6)' :
@@ -686,7 +673,6 @@
                     });
                 }
                 
-                // Draw center with pH label
                 const centerColor = {
                     'repellent': '#ff4444',
                     'attractant': '#44ff44',
@@ -700,7 +686,6 @@
                 ctx.arc(this.x, this.y, 8, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Draw pH value
                 if (this.type.startsWith('ph-')) {
                     ctx.fillStyle = '#fff';
                     ctx.font = 'bold 10px Arial';
@@ -715,7 +700,6 @@
 
         // Initialize simulation
         function init() {
-            // Create initial paramecia
             const count = window.innerWidth < 480 ? 15 : 25;
             for (let i = 0; i < count; i++) {
                 paramecia.push(new Paramecium(
@@ -733,19 +717,16 @@
             ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Update and draw chemicals
             chemicals.forEach(chemical => {
                 if (chemical.update) chemical.update();
                 chemical.draw();
             });
             
-            // Update and draw paramecia
             paramecia.forEach(paramecium => {
                 paramecium.update();
                 paramecium.draw();
             });
             
-            // Remove dead paramecia (health <= 0)
             paramecia = paramecia.filter(p => p.health > 0);
             updateParameciumCount();
             
@@ -756,6 +737,15 @@
         function toggleSimulation() {
             running = !running;
             if (running) animate();
+            
+            // Update play button on mobile
+            const playButtons = document.querySelectorAll('.mobile-btn');
+            playButtons.forEach(btn => {
+                if (btn.textContent.includes('Play')) {
+                    btn.querySelector('.mobile-btn-icon').textContent = running ? '⏸️' : '▶️';
+                    btn.querySelector('span:last-child').textContent = running ? 'Pause' : 'Play';
+                }
+            });
         }
 
         function resetSimulation() {
@@ -768,12 +758,16 @@
 
         function setChemicalType(type, event) {
             chemicalType = type;
-            document.querySelector('.selected-type').textContent = typeNames[type];
+            
+            // Update all selected type displays
+            document.querySelectorAll('.selected-type').forEach(el => {
+                el.textContent = typeNames[type];
+            });
             
             // Update button states
             document.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
             if (event && event.target) {
-                event.target.classList.add('active');
+                event.target.closest('button').classList.add('active');
             }
         }
 
@@ -787,10 +781,12 @@
         }
 
         function updateParameciumCount() {
-            document.querySelector('.paramecium-count').textContent = paramecia.length;
+            document.querySelectorAll('.paramecium-count').forEach(el => {
+                el.textContent = paramecia.length;
+            });
         }
 
-        // Handle both mouse and touch events
+        // Handle interaction
         function handleInteraction(e) {
             e.preventDefault();
             const rect = canvas.getBoundingClientRect();
