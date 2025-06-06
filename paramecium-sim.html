@@ -12,33 +12,6 @@
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
-        @media (max-width: 360px) {
-            .mobile-btn-icon {
-                font-size: 1.1rem;
-            }
-
-        /* Very small screens */
-        @media (max-width: 360px) {
-            .mobile-btn-icon {
-                font-size: 1.1rem;
-            }
-            
-            .mobile-btn span:last-child {
-                font-size: 0.45rem;
-            }
-            
-            .mobile-btn {
-                padding: 3px 1px;
-            }
-        }
-            
-            .mobile-btn span:last-child {
-                font-size: 0.45rem;
-            }
-            
-            .mobile-btn {
-                padding: 3px 1px;
-            }
         }
 
         body {
@@ -58,32 +31,32 @@
 
         .controls {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 15px;
+            padding: 10px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             z-index: 10;
         }
 
         .controls h1 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             background: linear-gradient(45deg, #00ff88, #00ffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         .control-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .control-group {
             background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 8px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.1);
             transition: all 0.3s ease;
@@ -91,33 +64,47 @@
 
         .control-group:hover {
             background: rgba(255,255,255,0.08);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0,255,136,0.1);
         }
 
         .control-group h3 {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #00ff88;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         button {
             background: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
             color: #000;
             border: none;
-            padding: 10px 20px;
+            padding: 6px 12px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
             width: 100%;
-            margin: 5px 0;
-            font-size: 0.85rem;
+            margin: 3px 0;
+            font-size: 0.75rem;
             touch-action: manipulation;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        button:hover .btn-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         button:hover, button:active {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(0,255,136,0.4);
+            transform: scale(1.02);
+            box-shadow: 0 3px 15px rgba(0,255,136,0.4);
         }
 
         button.active {
@@ -125,57 +112,91 @@
             box-shadow: 0 0 20px rgba(255,0,255,0.5);
         }
 
-        .ph-button {
+        .scenario-button {
+            background: linear-gradient(135deg, #8844ff 0%, #ff44ff 100%);
             position: relative;
+            overflow: hidden;
+        }
+
+        .scenario-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+            z-index: 0;
+        }
+
+        .scenario-button > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .scenario-button:hover::before {
+            width: 150%;
+            height: 150%;
+        }
+
+        .scenario-button:hover {
+            box-shadow: 0 5px 20px rgba(136,68,255,0.4);
+        }
+
+        .btn-icon {
+            font-size: 1rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
         }
 
         .ph-value {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
             background: rgba(0,0,0,0.3);
-            padding: 2px 6px;
+            padding: 2px 4px;
             border-radius: 3px;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
+            margin-left: auto;
         }
 
         .legend {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 5px;
+            font-size: 0.75rem;
         }
 
         .legend-color {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            box-shadow: 0 0 10px currentColor;
+            box-shadow: 0 0 8px currentColor;
         }
 
         .ph-scale {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255,255,255,0.05);
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.7rem;
         }
 
         .ph-gradient {
-            width: 100px;
-            height: 15px;
+            width: 80px;
+            height: 12px;
             background: linear-gradient(to right, #ff0000, #ff7700, #ffff00, #00ff00, #0077ff, #0000ff, #7700ff);
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
         canvas {
@@ -187,19 +208,19 @@
 
         .info {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            bottom: 15px;
+            left: 15px;
             background: rgba(0,0,0,0.8);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 8px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.9rem;
-            max-width: 350px;
+            font-size: 0.8rem;
+            max-width: 300px;
         }
 
         .info p {
-            margin: 5px 0;
+            margin: 4px 0;
         }
 
         .paramecium-count {
@@ -212,9 +233,60 @@
             font-weight: bold;
         }
 
+        .scenario-info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #00ff88;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 100;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 30px rgba(0,255,136,0.5);
+        }
+
+        .scenario-info.show {
+            opacity: 1;
+        }
+
         /* Mobile control panel - hidden by default */
         .mobile-controls {
             display: none;
+        }
+
+        /* Small desktop screens */
+        @media (max-width: 1200px) and (min-width: 1025px) {
+            .control-grid {
+                max-width: 1000px;
+            }
+        }
+
+        /* Medium screens/tablets */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .control-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .controls h1 {
+                font-size: 1.3rem;
+            }
+            
+            button {
+                font-size: 0.7rem;
+                padding: 5px 10px;
+            }
+            
+            .btn-icon {
+                font-size: 0.9rem;
+            }
         }
 
         /* Mobile-specific styles */
@@ -228,37 +300,47 @@
             .mobile-controls {
                 display: block;
                 background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-                padding: 6px 4px;
+                padding: 4px 3px;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             }
 
             .mobile-header {
                 text-align: center;
-                margin-bottom: 4px;
+                margin-bottom: 3px;
             }
 
             .mobile-header h1 {
                 background: linear-gradient(45deg, #00ff88, #00ffff);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                font-size: 1rem;
+                font-size: 0.9rem;
                 margin: 0;
             }
 
             .mobile-buttons {
                 display: grid;
-                grid-template-columns: repeat(7, 1fr);
+                grid-template-columns: repeat(8, 1fr);
                 gap: 2px;
-                margin-bottom: 4px;
+                margin-bottom: 3px;
+            }
+
+            .mobile-scenarios {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 2px;
+                margin-bottom: 3px;
+                padding: 3px;
+                background: rgba(136,68,255,0.1);
+                border-radius: 4px;
             }
 
             .mobile-btn {
                 background: none;
                 color: #fff;
                 border: none;
-                padding: 4px 2px;
+                padding: 3px 2px;
                 border-radius: 4px;
-                font-size: 0.65rem;
+                font-size: 0.6rem;
                 font-weight: normal;
                 min-height: auto;
                 cursor: pointer;
@@ -267,8 +349,12 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 2px;
+                gap: 1px;
                 transition: all 0.2s ease;
+            }
+
+            .mobile-btn.scenario {
+                background: rgba(136,68,255,0.2);
             }
 
             .mobile-btn:hover .mobile-btn-icon {
@@ -291,17 +377,17 @@
             }
 
             .mobile-btn-icon {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
                 line-height: 1;
                 transition: all 0.2s ease;
                 filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
             }
 
             .mobile-btn span:last-child {
-                font-size: 0.55rem;
+                font-size: 0.5rem;
                 opacity: 0.9;
                 text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-                letter-spacing: 0.5px;
+                letter-spacing: 0.3px;
             }
 
             .mobile-status {
@@ -309,57 +395,35 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 0 6px;
-                font-size: 0.7rem;
+                font-size: 0.65rem;
                 background: rgba(0,0,0,0.3);
                 border-radius: 4px;
-                margin-top: 3px;
+                margin-top: 2px;
             }
 
             .info {
                 display: none;
             }
+
+            .scenario-info {
+                font-size: 1rem;
+                padding: 15px;
+            }
         }
 
         @media (max-width: 480px) {
             .mobile-header h1 {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
             
             .mobile-buttons {
-                grid-template-columns: repeat(7, 1fr);
+                grid-template-columns: repeat(8, 1fr);
                 gap: 1px;
             }
 
-            .mobile-btn {
-                padding: 3px 1px;
-            }
-            
-            .mobile-btn-icon {
-                font-size: 1rem;
-            }
-            
-            .mobile-btn span:last-child {
-                font-size: 0.5rem;
-            }
-        }
-
-        /* Landscape mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .mobile-controls {
-                padding: 3px;
-            }
-
-            .mobile-header {
-                margin-bottom: 3px;
-            }
-
-            .mobile-header h1 {
-                font-size: 0.9rem;
-            }
-
-            .mobile-buttons {
-                grid-template-columns: repeat(7, 1fr);
-                gap: 2px;
+            .mobile-scenarios {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 1px;
             }
 
             .mobile-btn {
@@ -371,11 +435,50 @@
             }
             
             .mobile-btn span:last-child {
-                font-size: 0.5rem;
+                font-size: 0.45rem;
+            }
+        }
+
+        /* Landscape mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .mobile-controls {
+                padding: 2px;
+            }
+
+            .mobile-header {
+                margin-bottom: 2px;
+            }
+
+            .mobile-header h1 {
+                font-size: 0.8rem;
+            }
+
+            .mobile-buttons {
+                grid-template-columns: repeat(8, 1fr);
+                gap: 1px;
+            }
+
+            .mobile-scenarios {
+                display: flex;
+                gap: 3px;
+                overflow-x: auto;
+                padding: 2px;
+            }
+
+            .mobile-btn {
+                padding: 2px 1px;
+            }
+            
+            .mobile-btn-icon {
+                font-size: 0.8rem;
+            }
+            
+            .mobile-btn span:last-child {
+                font-size: 0.45rem;
             }
 
             .mobile-status {
-                font-size: 0.65rem;
+                font-size: 0.6rem;
                 padding: 0 4px;
             }
         }
@@ -383,15 +486,23 @@
         /* Very small screens */
         @media (max-width: 360px) {
             .mobile-btn-icon {
-                font-size: 1.1rem;
+                font-size: 0.8rem;
             }
             
             .mobile-btn span:last-child {
-                font-size: 0.45rem;
+                font-size: 0.4rem;
             }
             
             .mobile-btn {
-                padding: 3px 1px;
+                padding: 2px 1px;
+            }
+            
+            .mobile-buttons {
+                grid-template-columns: repeat(8, 1fr);
+            }
+            
+            .mobile-scenarios {
+                grid-template-columns: repeat(6, 1fr);
             }
         }
     </style>
@@ -404,30 +515,39 @@
             <div class="control-grid">
                 <div class="control-group">
                     <h3>Simulation Controls</h3>
-                    <button onclick="toggleSimulation()">Start/Pause</button>
-                    <button onclick="resetSimulation()">Reset</button>
+                    <button onclick="toggleSimulation()"><span class="btn-icon">▶️</span> Start</button>
+                    <button onclick="resetSimulation()"><span class="btn-icon">🔄</span> Reset</button>
                 </div>
                 <div class="control-group">
                     <h3>Add Chemicals</h3>
-                    <button onclick="setChemicalType('repellent', event)">Toxin (Repellent)</button>
-                    <button onclick="setChemicalType('attractant', event)">Food (Attractant)</button>
+                    <button onclick="setChemicalType('repellent', event)"><span class="btn-icon">☠️</span> Toxin</button>
+                    <button onclick="setChemicalType('attractant', event)"><span class="btn-icon">🍕</span> Food</button>
                 </div>
                 <div class="control-group">
                     <h3>pH Solutions</h3>
-                    <button class="ph-button" onclick="setChemicalType('ph-acidic', event)">
-                        Strong Acid <span class="ph-value">pH 3</span>
+                    <button onclick="setChemicalType('ph-acidic', event)">
+                        <span class="btn-icon">🔴</span> <span>Acid</span> <span class="ph-value">pH 3</span>
                     </button>
-                    <button class="ph-button" onclick="setChemicalType('ph-neutral', event)">
-                        Neutral <span class="ph-value">pH 7</span>
+                    <button onclick="setChemicalType('ph-neutral', event)">
+                        <span class="btn-icon">🟢</span> <span>Neutral</span> <span class="ph-value">pH 7</span>
                     </button>
-                    <button class="ph-button" onclick="setChemicalType('ph-basic', event)">
-                        Strong Base <span class="ph-value">pH 11</span>
+                    <button onclick="setChemicalType('ph-basic', event)">
+                        <span class="btn-icon">🔵</span> <span>Base</span> <span class="ph-value">pH 11</span>
                     </button>
                 </div>
                 <div class="control-group">
+                    <h3>Preset Scenarios</h3>
+                    <button class="scenario-button" onclick="loadScenario('phGradient')"><span class="btn-icon">🌈</span> pH Gradient</button>
+                    <button class="scenario-button" onclick="loadScenario('maze')"><span class="btn-icon">🌀</span> Toxin Maze</button>
+                    <button class="scenario-button" onclick="loadScenario('foodTrail')"><span class="btn-icon">🍔</span> Food Trail</button>
+                    <button class="scenario-button" onclick="loadScenario('phZones')"><span class="btn-icon">🎯</span> pH Zones</button>
+                    <button class="scenario-button" onclick="loadScenario('obstacle')"><span class="btn-icon">🏃</span> Obstacle Course</button>
+                    <button class="scenario-button" onclick="loadScenario('survival')"><span class="btn-icon">⚔️</span> Survival Challenge</button>
+                </div>
+                <div class="control-group">
                     <h3>Clear Options</h3>
-                    <button onclick="clearChemicals()">Clear All Drops</button>
-                    <button onclick="clearParamecia()">Clear Paramecia</button>
+                    <button onclick="clearChemicals()"><span class="btn-icon">🧹</span> Clear Drops</button>
+                    <button onclick="clearParamecia()"><span class="btn-icon">❌</span> Clear Cells</button>
                 </div>
             </div>
             <div class="legend">
@@ -452,9 +572,9 @@
                     <span>Base (pH 11)</span>
                 </div>
                 <div class="ph-scale">
-                    <span style="font-size: 0.8rem;">pH Scale:</span>
+                    <span>pH Scale:</span>
                     <div class="ph-gradient"></div>
-                    <span style="font-size: 0.8rem;">0-14</span>
+                    <span>0-14</span>
                 </div>
             </div>
         </div>
@@ -493,6 +613,36 @@
                     <span class="mobile-btn-icon">🔄</span>
                     <span>Reset</span>
                 </button>
+                <button class="mobile-btn" onclick="clearChemicals()">
+                    <span class="mobile-btn-icon">🧹</span>
+                    <span>Clear</span>
+                </button>
+            </div>
+            <div class="mobile-scenarios">
+                <button class="mobile-btn scenario" onclick="loadScenario('phGradient')">
+                    <span class="mobile-btn-icon">🌈</span>
+                    <span>pH Grad</span>
+                </button>
+                <button class="mobile-btn scenario" onclick="loadScenario('maze')">
+                    <span class="mobile-btn-icon">🌀</span>
+                    <span>Maze</span>
+                </button>
+                <button class="mobile-btn scenario" onclick="loadScenario('foodTrail')">
+                    <span class="mobile-btn-icon">🍔</span>
+                    <span>Trail</span>
+                </button>
+                <button class="mobile-btn scenario" onclick="loadScenario('phZones')">
+                    <span class="mobile-btn-icon">🎯</span>
+                    <span>Zones</span>
+                </button>
+                <button class="mobile-btn scenario" onclick="loadScenario('obstacle')">
+                    <span class="mobile-btn-icon">🏃</span>
+                    <span>Course</span>
+                </button>
+                <button class="mobile-btn scenario" onclick="loadScenario('survival')">
+                    <span class="mobile-btn-icon">⚔️</span>
+                    <span>Survive</span>
+                </button>
             </div>
             <div class="mobile-status">
                 <span>Selected: <span class="selected-type">Toxin</span></span>
@@ -506,10 +656,12 @@
             <p>Click to place drops after selecting type</p>
             <p>Selected: <span class="selected-type">Toxin</span></p>
             <p>Paramecia: <span class="paramecium-count">25</span></p>
-            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">
+            <p style="font-size: 0.7rem; margin-top: 8px; opacity: 0.8;">
                 💡 Paramecia prefer neutral pH (6.5-7.5) and avoid extreme pH levels
             </p>
         </div>
+
+        <div class="scenario-info" id="scenarioInfo"></div>
     </div>
 
     <script>
@@ -557,7 +709,7 @@
                 this.vx = (Math.random() - 0.5) * 2;
                 this.vy = (Math.random() - 0.5) * 2;
                 this.angle = Math.random() * Math.PI * 2;
-                this.size = Math.min(15, window.innerWidth * 0.03);
+                this.size = Math.min(12, window.innerWidth * 0.025);
                 this.speed = 1;
                 this.turnRate = 0.1;
                 this.health = 1;
@@ -674,7 +826,7 @@
                 this.x = x;
                 this.y = y;
                 this.type = type;
-                this.radius = Math.min(100, window.innerWidth * 0.15);
+                this.radius = Math.min(80, window.innerWidth * 0.12);
                 this.strength = 1;
                 this.particles = [];
                 
@@ -767,6 +919,176 @@
             }
         }
 
+        // Scenario functions
+        function showScenarioInfo(text) {
+            const info = document.getElementById('scenarioInfo');
+            info.textContent = text;
+            info.classList.add('show');
+            setTimeout(() => {
+                info.classList.remove('show');
+            }, 3000);
+        }
+
+        function loadScenario(scenario) {
+            clearChemicals();
+            clearParamecia();
+            
+            switch(scenario) {
+                case 'phGradient':
+                    createPHGradient();
+                    showScenarioInfo('pH Gradient: Watch paramecia navigate from acid to base!');
+                    break;
+                case 'maze':
+                    createToxinMaze();
+                    showScenarioInfo('Toxin Maze: Can paramecia find the safe path?');
+                    break;
+                case 'foodTrail':
+                    createFoodTrail();
+                    showScenarioInfo('Food Trail: Follow the nutrients!');
+                    break;
+                case 'phZones':
+                    createPHZones();
+                    showScenarioInfo('pH Zones: Find the neutral safe zones!');
+                    break;
+                case 'obstacle':
+                    createObstacleCourse();
+                    showScenarioInfo('Obstacle Course: Navigate to the food!');
+                    break;
+                case 'survival':
+                    createSurvivalChallenge();
+                    showScenarioInfo('Survival Challenge: Avoid toxins, find food!');
+                    break;
+            }
+            
+            // Add paramecia after scenario is set up
+            const count = window.innerWidth < 480 ? 20 : 30;
+            for (let i = 0; i < count; i++) {
+                paramecia.push(new Paramecium(
+                    canvas.width / 2 + (Math.random() - 0.5) * 100,
+                    canvas.height / 2 + (Math.random() - 0.5) * 100
+                ));
+            }
+            updateParameciumCount();
+            
+            if (!running) {
+                toggleSimulation();
+            }
+        }
+
+        function createPHGradient() {
+            const steps = 7;
+            for (let i = 0; i < steps; i++) {
+                const x = (i + 1) * (canvas.width / (steps + 1));
+                const y = canvas.height / 2;
+                
+                if (i < 2) {
+                    chemicals.push(new Chemical(x, y, 'ph-acidic'));
+                } else if (i < 5) {
+                    chemicals.push(new Chemical(x, y, 'ph-neutral'));
+                } else {
+                    chemicals.push(new Chemical(x, y, 'ph-basic'));
+                }
+            }
+        }
+
+        function createToxinMaze() {
+            const cols = 5;
+            const rows = 3;
+            const cellWidth = canvas.width / cols;
+            const cellHeight = canvas.height / rows;
+            
+            // Create maze pattern
+            const mazePattern = [
+                [1, 0, 1, 1, 1],
+                [1, 0, 0, 0, 1],
+                [1, 1, 1, 0, 1]
+            ];
+            
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    if (mazePattern[row][col] === 1) {
+                        const x = col * cellWidth + cellWidth / 2;
+                        const y = row * cellHeight + cellHeight / 2;
+                        chemicals.push(new Chemical(x, y, 'repellent'));
+                    }
+                }
+            }
+            
+            // Add food at the end
+            chemicals.push(new Chemical(canvas.width - cellWidth / 2, canvas.height / 2, 'attractant'));
+        }
+
+        function createFoodTrail() {
+            const points = 10;
+            const amplitude = canvas.height / 3;
+            
+            for (let i = 0; i < points; i++) {
+                const x = (i / (points - 1)) * canvas.width;
+                const y = canvas.height / 2 + Math.sin(i * 0.5) * amplitude;
+                chemicals.push(new Chemical(x, y, 'attractant'));
+            }
+        }
+
+        function createPHZones() {
+            // Create a checkerboard pattern of pH zones
+            const zones = 4;
+            const zoneWidth = canvas.width / zones;
+            const zoneHeight = canvas.height / zones;
+            
+            for (let row = 0; row < zones; row++) {
+                for (let col = 0; col < zones; col++) {
+                    const x = col * zoneWidth + zoneWidth / 2;
+                    const y = row * zoneHeight + zoneHeight / 2;
+                    
+                    if ((row + col) % 3 === 0) {
+                        chemicals.push(new Chemical(x, y, 'ph-acidic'));
+                    } else if ((row + col) % 3 === 1) {
+                        chemicals.push(new Chemical(x, y, 'ph-neutral'));
+                    } else {
+                        chemicals.push(new Chemical(x, y, 'ph-basic'));
+                    }
+                }
+            }
+        }
+
+        function createObstacleCourse() {
+            // Create barriers with toxins
+            const barriers = 3;
+            for (let i = 0; i < barriers; i++) {
+                const x = (i + 1) * (canvas.width / (barriers + 1));
+                const gapY = Math.random() * canvas.height;
+                const gapSize = 100;
+                
+                // Top barrier
+                for (let y = 0; y < gapY - gapSize / 2; y += 80) {
+                    chemicals.push(new Chemical(x, y, 'repellent'));
+                }
+                
+                // Bottom barrier
+                for (let y = gapY + gapSize / 2; y < canvas.height; y += 80) {
+                    chemicals.push(new Chemical(x, y, 'repellent'));
+                }
+            }
+            
+            // Add food rewards
+            chemicals.push(new Chemical(50, canvas.height / 2, 'attractant'));
+            chemicals.push(new Chemical(canvas.width - 50, canvas.height / 2, 'attractant'));
+        }
+
+        function createSurvivalChallenge() {
+            // Random distribution of all chemical types
+            const totalChemicals = 15;
+            
+            for (let i = 0; i < totalChemicals; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const types = ['repellent', 'attractant', 'ph-acidic', 'ph-neutral', 'ph-basic'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                
+                chemicals.push(new Chemical(x, y, type));
+            }
+        }
+
         // Initialize simulation
         function init() {
             const count = window.innerWidth < 480 ? 15 : 25;
@@ -807,10 +1129,16 @@
             running = !running;
             if (running) animate();
             
+            // Update play button on desktop
+            const desktopPlayBtn = document.querySelector('.controls button[onclick="toggleSimulation()"]');
+            if (desktopPlayBtn) {
+                desktopPlayBtn.innerHTML = `<span class="btn-icon">${running ? '⏸️' : '▶️'}</span> ${running ? 'Pause' : 'Start'}`;
+            }
+            
             // Update play button on mobile
             const playButtons = document.querySelectorAll('.mobile-btn');
             playButtons.forEach(btn => {
-                if (btn.textContent.includes('Play')) {
+                if (btn.textContent.includes('Play') || btn.textContent.includes('Pause')) {
                     btn.querySelector('.mobile-btn-icon').textContent = running ? '⏸️' : '▶️';
                     btn.querySelector('span:last-child').textContent = running ? 'Pause' : 'Play';
                 }
