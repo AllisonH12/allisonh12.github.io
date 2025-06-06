@@ -12,6 +12,33 @@
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
+        @media (max-width: 360px) {
+            .mobile-btn-icon {
+                font-size: 1.1rem;
+            }
+
+        /* Very small screens */
+        @media (max-width: 360px) {
+            .mobile-btn-icon {
+                font-size: 1.1rem;
+            }
+            
+            .mobile-btn span:last-child {
+                font-size: 0.45rem;
+            }
+            
+            .mobile-btn {
+                padding: 3px 1px;
+            }
+        }
+            
+            .mobile-btn span:last-child {
+                font-size: 0.45rem;
+            }
+            
+            .mobile-btn {
+                padding: 3px 1px;
+            }
         }
 
         body {
@@ -201,43 +228,39 @@
             .mobile-controls {
                 display: block;
                 background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-                padding: 8px;
+                padding: 6px 4px;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             }
 
             .mobile-header {
                 text-align: center;
-                margin-bottom: 8px;
+                margin-bottom: 4px;
             }
 
             .mobile-header h1 {
                 background: linear-gradient(45deg, #00ff88, #00ffff);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                font-size: 1.2rem;
+                font-size: 1rem;
                 margin: 0;
             }
 
             .mobile-buttons {
                 display: grid;
-                grid-template-columns: repeat(5, 1fr);
-                gap: 4px;
-                margin-bottom: 6px;
-            }
-
-            .mobile-buttons.secondary {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(7, 1fr);
+                gap: 2px;
+                margin-bottom: 4px;
             }
 
             .mobile-btn {
-                background: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
-                color: #000;
+                background: none;
+                color: #fff;
                 border: none;
-                padding: 8px 4px;
+                padding: 4px 2px;
                 border-radius: 4px;
-                font-size: 0.7rem;
-                font-weight: bold;
-                min-height: 36px;
+                font-size: 0.65rem;
+                font-weight: normal;
+                min-height: auto;
                 cursor: pointer;
                 touch-action: manipulation;
                 display: flex;
@@ -245,31 +268,51 @@
                 align-items: center;
                 justify-content: center;
                 gap: 2px;
+                transition: all 0.2s ease;
             }
 
-            .mobile-btn.active {
-                background: linear-gradient(135deg, #ff00ff 0%, #ff0088 100%);
+            .mobile-btn:hover .mobile-btn-icon {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+            }
+            
+            .mobile-btn:active {
+                transform: scale(0.9);
             }
 
-            .mobile-btn.toxin { background: linear-gradient(135deg, #ff4444 0%, #ff6666 100%); }
-            .mobile-btn.food { background: linear-gradient(135deg, #44ff44 0%, #66ff66 100%); }
-            .mobile-btn.acid { background: linear-gradient(135deg, #ff0044 0%, #ff4466 100%); }
-            .mobile-btn.neutral { background: linear-gradient(135deg, #00ff44 0%, #44ff66 100%); }
-            .mobile-btn.base { background: linear-gradient(135deg, #4400ff 0%, #6644ff 100%); }
+            .mobile-btn.active .mobile-btn-icon {
+                filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 20px #00ff88);
+                transform: scale(1.1);
+            }
+            
+            .mobile-btn.active span:last-child {
+                color: #00ff88;
+                font-weight: bold;
+            }
 
             .mobile-btn-icon {
-                font-size: 1rem;
+                font-size: 1.4rem;
+                line-height: 1;
+                transition: all 0.2s ease;
+                filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+            }
+
+            .mobile-btn span:last-child {
+                font-size: 0.55rem;
+                opacity: 0.9;
+                text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+                letter-spacing: 0.5px;
             }
 
             .mobile-status {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 0 8px;
-                font-size: 0.8rem;
+                padding: 0 6px;
+                font-size: 0.7rem;
                 background: rgba(0,0,0,0.3);
                 border-radius: 4px;
-                margin-top: 4px;
+                margin-top: 3px;
             }
 
             .info {
@@ -278,41 +321,77 @@
         }
 
         @media (max-width: 480px) {
-            .mobile-buttons {
-                grid-template-columns: repeat(4, 1fr);
+            .mobile-header h1 {
+                font-size: 0.9rem;
             }
-
-            .mobile-buttons.secondary {
-                grid-template-columns: repeat(3, 1fr);
+            
+            .mobile-buttons {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 1px;
             }
 
             .mobile-btn {
-                font-size: 0.65rem;
-                padding: 6px 2px;
+                padding: 3px 1px;
+            }
+            
+            .mobile-btn-icon {
+                font-size: 1rem;
+            }
+            
+            .mobile-btn span:last-child {
+                font-size: 0.5rem;
             }
         }
 
         /* Landscape mobile */
         @media (max-height: 500px) and (orientation: landscape) {
             .mobile-controls {
-                padding: 4px;
+                padding: 3px;
+            }
+
+            .mobile-header {
+                margin-bottom: 3px;
             }
 
             .mobile-header h1 {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
 
             .mobile-buttons {
                 grid-template-columns: repeat(7, 1fr);
+                gap: 2px;
             }
 
             .mobile-btn {
-                min-height: 32px;
-                font-size: 0.65rem;
+                padding: 2px 1px;
+            }
+            
+            .mobile-btn-icon {
+                font-size: 0.9rem;
+            }
+            
+            .mobile-btn span:last-child {
+                font-size: 0.5rem;
             }
 
             .mobile-status {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
+                padding: 0 4px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 360px) {
+            .mobile-btn-icon {
+                font-size: 1.1rem;
+            }
+            
+            .mobile-btn span:last-child {
+                font-size: 0.45rem;
+            }
+            
+            .mobile-btn {
+                padding: 3px 1px;
             }
         }
     </style>
@@ -386,28 +465,26 @@
                 <h1>🦠 Paramecium Simulation</h1>
             </div>
             <div class="mobile-buttons">
-                <button class="mobile-btn toxin" onclick="setChemicalType('repellent', event)">
+                <button class="mobile-btn" onclick="setChemicalType('repellent', event)">
                     <span class="mobile-btn-icon">☠️</span>
                     <span>Toxin</span>
                 </button>
-                <button class="mobile-btn food" onclick="setChemicalType('attractant', event)">
+                <button class="mobile-btn" onclick="setChemicalType('attractant', event)">
                     <span class="mobile-btn-icon">🍕</span>
                     <span>Food</span>
                 </button>
-                <button class="mobile-btn acid" onclick="setChemicalType('ph-acidic', event)">
+                <button class="mobile-btn" onclick="setChemicalType('ph-acidic', event)">
                     <span class="mobile-btn-icon">🔴</span>
                     <span>pH 3</span>
                 </button>
-                <button class="mobile-btn neutral" onclick="setChemicalType('ph-neutral', event)">
+                <button class="mobile-btn" onclick="setChemicalType('ph-neutral', event)">
                     <span class="mobile-btn-icon">🟢</span>
                     <span>pH 7</span>
                 </button>
-                <button class="mobile-btn base" onclick="setChemicalType('ph-basic', event)">
+                <button class="mobile-btn" onclick="setChemicalType('ph-basic', event)">
                     <span class="mobile-btn-icon">🔵</span>
                     <span>pH 11</span>
                 </button>
-            </div>
-            <div class="mobile-buttons secondary">
                 <button class="mobile-btn" onclick="toggleSimulation()">
                     <span class="mobile-btn-icon">▶️</span>
                     <span>Play</span>
@@ -415,14 +492,6 @@
                 <button class="mobile-btn" onclick="resetSimulation()">
                     <span class="mobile-btn-icon">🔄</span>
                     <span>Reset</span>
-                </button>
-                <button class="mobile-btn" onclick="clearChemicals()">
-                    <span class="mobile-btn-icon">💧</span>
-                    <span>Clear</span>
-                </button>
-                <button class="mobile-btn" onclick="clearParamecia()">
-                    <span class="mobile-btn-icon">🦠</span>
-                    <span>Clear</span>
                 </button>
             </div>
             <div class="mobile-status">
